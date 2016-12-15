@@ -33,15 +33,13 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     var disclosureTriangleIsOpen = false
     
     var originalOutPutTextViewHeight: CGFloat = 256
-    var changedOutPutTextViewHeight: CGFloat = 0
+    var changedOutPutTextViewHeight: CGFloat = 256
     
     var viewIsExpanded = false
-
+    
     var outputTextViewHeight: CGFloat {
         return outputTextView.frame.height
     }
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,21 +126,21 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         
         if downloadString.contains("Downloading video") {
             
-//            print(downloadStringWords)
-//            
-//            guard let lastString = downloadStringWords.last, let secondNumberIndex = downloadStringWords.index(of: lastString) else { return }
-//            guard let firstNumber = Double(downloadStringWords[secondNumberIndex - 2]) else { return }
-//
-//            if Int(firstNumber) != currentVideo {
-//
-//                currentVideo = Int(firstNumber)
-//
-//                downloadProgressIndicator.doubleValue = firstNumber
-//                downloadProgressIndicator.startAnimation(self)
-//            }
-//
+            //            print(downloadStringWords)
+            //
+            //            guard let lastString = downloadStringWords.last, let secondNumberIndex = downloadStringWords.index(of: lastString) else { return }
+            //            guard let firstNumber = Double(downloadStringWords[secondNumberIndex - 2]) else { return }
+            //
+            //            if Int(firstNumber) != currentVideo {
+            //
+            //                currentVideo = Int(firstNumber)
+            //
+            //                downloadProgressIndicator.doubleValue = firstNumber
+            //                downloadProgressIndicator.startAnimation(self)
+            //            }
+            //
             let downloadStringWords = downloadString.components(separatedBy: " ")
-
+            
             var secondNumber = 1.0
             var secondNumberInt = 1
             if let secondNum = downloadStringWords.last {
@@ -184,7 +182,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         if speed == "" { speed = downloadStringWords[(atStringIndex + 2)] }
         
         
-        downloadSpeedLabel.stringValue = speed        
+        downloadSpeedLabel.stringValue = speed
     }
     func parseResponseStringForETA(responseString: String) {
         let words = responseString.components(separatedBy: " ")
@@ -235,6 +233,10 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     }
     
     @IBAction func viewConsoleOutputButtonTapped(_ sender: NSButton) {
+        toggleDisclosureTriangle()
+    }
+    
+    func toggleDisclosureTriangle() {
         if disclosureTriangleIsOpen {
             
             changedOutPutTextViewHeight = outputTextViewHeight
@@ -245,13 +247,15 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
             outputTextViewScrollView.isHidden = true
             
         } else {
-            self.view.window?.change(height: changedOutPutTextViewHeight == 0 ? originalOutPutTextViewHeight : changedOutPutTextViewHeight)
+            
+            self.view.window?.change(height: changedOutPutTextViewHeight)
             
             outputSeparatorLine.isHidden = false
             outputTextViewScrollView.isHidden = false
         }
         
         disclosureTriangleIsOpen = !disclosureTriangleIsOpen
+        
         
     }
 }

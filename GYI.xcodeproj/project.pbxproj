@@ -112,9 +112,9 @@
 		46CCE5B11E0309F50005239C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
-				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
 				46CCE59D1E0309AB0005239C /* MainViewController.swift */,
+				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
+				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
 			);
 			name = "View Controllers";
 			path = ..;

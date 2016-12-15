@@ -27,7 +27,7 @@ class DownloadController {
     
     
     
-    func downloadVideoAt2(videoURL: String, outputFolder: String, account: Account? = nil) {
+    func downloadVideoAt(videoURL: String, outputFolder: String, account: Account? = nil) {
         
         let task = Process()
         guard let path = Bundle.main.resourcePath else { return }

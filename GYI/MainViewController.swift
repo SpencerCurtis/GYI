@@ -62,7 +62,7 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
         
         let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
         
-        downloadController.downloadVideoAt2(videoURL: url, outputFolder: output, account: account)
+        downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account)
         
         guard let window = self.view.window, downloadProgressContainerView.isHidden == true else { return }
         downloadProgressContainerView.isHidden = false
