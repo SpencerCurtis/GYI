@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46CCE5861E0309510005239C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5851E0309510005239C /* AppDelegate.swift */; };
+		46CCE58A1E0309510005239C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE5891E0309510005239C /* Assets.xcassets */; };
+		46CCE58D1E0309510005239C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE58B1E0309510005239C /* Main.storyboard */; };
+		46CCE5A21E0309AB0005239C /* Account + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5941E0309AB0005239C /* Account + Convenience.swift */; };
+		46CCE5A31E0309AB0005239C /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5951E0309AB0005239C /* AccountController.swift */; };
+		46CCE5A61E0309AB0005239C /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */; };
+		46CCE5A71E0309AB0005239C /* DownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59B1E0309AB0005239C /* DownloadController.swift */; };
+		46CCE5A81E0309AB0005239C /* DownloadProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */; };
+		46CCE5A91E0309AB0005239C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59D1E0309AB0005239C /* MainViewController.swift */; };
+		46CCE5AA1E0309AB0005239C /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59E1E0309AB0005239C /* Stack.swift */; };
+		46CCE5AB1E0309AB0005239C /* youtube-dl in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE59F1E0309AB0005239C /* youtube-dl */; };
+		46CCE5AC1E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5A01E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		46CCE5821E0309510005239C /* GYI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46CCE5851E0309510005239C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		46CCE5891E0309510005239C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		46CCE58C1E0309510005239C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		46CCE58E1E0309510005239C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46CCE5941E0309AB0005239C /* Account + Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Account + Convenience.swift"; path = "GYI/Account + Convenience.swift"; sourceTree = "<group>"; };
+		46CCE5951E0309AB0005239C /* AccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountController.swift; path = GYI/AccountController.swift; sourceTree = "<group>"; };
+		46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = GYI/CreateAccountViewController.swift; sourceTree = "<group>"; };
+		46CCE59B1E0309AB0005239C /* DownloadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadController.swift; path = GYI/DownloadController.swift; sourceTree = "<group>"; };
+		46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadProgressViewController.swift; path = GYI/DownloadProgressViewController.swift; sourceTree = "<group>"; };
+		46CCE59D1E0309AB0005239C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = GYI/MainViewController.swift; sourceTree = "<group>"; };
+		46CCE59E1E0309AB0005239C /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = GYI/Stack.swift; sourceTree = "<group>"; };
+		46CCE59F1E0309AB0005239C /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; path = "youtube-dl"; sourceTree = "<group>"; };
+		46CCE5A11E0309AB0005239C /* YoutubeDLGUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoutubeDLGUI.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		46CCE57F1E0309510005239C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		46CCE5791E0309510005239C = {
+			isa = PBXGroup;
+			children = (
+				46CCE5841E0309510005239C /* GYI */,
+				46CCE5831E0309510005239C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		46CCE5831E0309510005239C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE5821E0309510005239C /* GYI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		46CCE5841E0309510005239C /* GYI */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE5AD1E0309B30005239C /* Models */,
+				46CCE5B21E030A010005239C /* Views */,
+				46CCE5B11E0309F50005239C /* View Controllers */,
+				46CCE5AE1E0309BC0005239C /* Controllers */,
+				46CCE5AF1E0309DF0005239C /* Resources */,
+			);
+			path = GYI;
+			sourceTree = "<group>";
+		};
+		46CCE5AD1E0309B30005239C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE5941E0309AB0005239C /* Account + Convenience.swift */,
+				46CCE59E1E0309AB0005239C /* Stack.swift */,
+				46CCE5A01E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		46CCE5AE1E0309BC0005239C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE5951E0309AB0005239C /* AccountController.swift */,
+				46CCE59B1E0309AB0005239C /* DownloadController.swift */,
+			);
+			name = Controllers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		46CCE5AF1E0309DF0005239C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE5851E0309510005239C /* AppDelegate.swift */,
+				46CCE5891E0309510005239C /* Assets.xcassets */,
+				46CCE58E1E0309510005239C /* Info.plist */,
+				46CCE59F1E0309AB0005239C /* youtube-dl */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		46CCE5B11E0309F50005239C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
+				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
+				46CCE59D1E0309AB0005239C /* MainViewController.swift */,
+			);
+			name = "View Controllers";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		46CCE5B21E030A010005239C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				46CCE58B1E0309510005239C /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		46CCE5811E0309510005239C /* GYI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46CCE5911E0309510005239C /* Build configuration list for PBXNativeTarget "GYI" */;
+			buildPhases = (
+				46CCE57E1E0309510005239C /* Sources */,
+				46CCE57F1E0309510005239C /* Frameworks */,
+				46CCE5801E0309510005239C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GYI;
+			productName = GYI;
+			productReference = 46CCE5821E0309510005239C /* GYI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46CCE57A1E0309510005239C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Spencer Curtis";
+				TargetAttributes = {
+					46CCE5811E0309510005239C = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = W4BT774F98;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 46CCE57D1E0309510005239C /* Build configuration list for PBXProject "GYI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 46CCE5791E0309510005239C;
+			productRefGroup = 46CCE5831E0309510005239C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				46CCE5811E0309510005239C /* GYI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		46CCE5801E0309510005239C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46CCE58A1E0309510005239C /* Assets.xcassets in Resources */,
+				46CCE58D1E0309510005239C /* Main.storyboard in Resources */,
+				46CCE5AB1E0309AB0005239C /* youtube-dl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		46CCE57E1E0309510005239C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46CCE5A91E0309AB0005239C /* MainViewController.swift in Sources */,
+				46CCE5A61E0309AB0005239C /* CreateAccountViewController.swift in Sources */,
+				46CCE5A31E0309AB0005239C /* AccountController.swift in Sources */,
+				46CCE5861E0309510005239C /* AppDelegate.swift in Sources */,
+				46CCE5AA1E0309AB0005239C /* Stack.swift in Sources */,
+				46CCE5A21E0309AB0005239C /* Account + Convenience.swift in Sources */,
+				46CCE5A71E0309AB0005239C /* DownloadController.swift in Sources */,
+				46CCE5AC1E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld in Sources */,
+				46CCE5A81E0309AB0005239C /* DownloadProgressViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		46CCE58B1E0309510005239C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46CCE58C1E0309510005239C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		46CCE58F1E0309510005239C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		46CCE5901E0309510005239C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		46CCE5921E0309510005239C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W4BT774F98;
+				INFOPLIST_FILE = GYI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpencerCurtis.GYI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		46CCE5931E0309510005239C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = W4BT774F98;
+				INFOPLIST_FILE = GYI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpencerCurtis.GYI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		46CCE57D1E0309510005239C /* Build configuration list for PBXProject "GYI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46CCE58F1E0309510005239C /* Debug */,
+				46CCE5901E0309510005239C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46CCE5911E0309510005239C /* Build configuration list for PBXNativeTarget "GYI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46CCE5921E0309510005239C /* Debug */,
+				46CCE5931E0309510005239C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		46CCE5A01E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				46CCE5A11E0309AB0005239C /* YoutubeDLGUI.xcdatamodel */,
+			);
+			currentVersion = 46CCE5A11E0309AB0005239C /* YoutubeDLGUI.xcdatamodel */;
+			name = YoutubeDLGUI.xcdatamodeld;
+			path = GYI/YoutubeDLGUI.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 46CCE57A1E0309510005239C /* Project object */;
+}
