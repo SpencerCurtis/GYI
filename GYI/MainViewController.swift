@@ -50,6 +50,8 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
     }
     
     @IBAction func submitButtonTapped(_ sender: NSButton) {
+        
+        guard inputTextField.stringValue != "" else { return }
         NotificationCenter.default.post(name: processDidBeginNotification, object: self)
         let url = inputTextField.stringValue
         guard let outputFolder = outputPathControl.url?.absoluteString else { return }
