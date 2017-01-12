@@ -31,11 +31,13 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
     override func viewWillAppear() {
         
         setupAccountSelectionPopUpButton()
-        containerViewOriginalHeight = downloadProgressContainerView.frame.height
-        downloadProgressContainerView.isHidden = true
-        guard let window = self.view.window else { return }
-        window.setContentSize(NSSize(width: 600, height: 120))
-        
+        if let downloadProgressContainerView = downloadProgressContainerView {
+            containerViewOriginalHeight = downloadProgressContainerView.frame.height
+            downloadProgressContainerView.isHidden = true
+            guard let window = self.view.window else { return }
+            window.setContentSize(NSSize(width: 600, height: 120))
+            
+        }
         
     }
     
