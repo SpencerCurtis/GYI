@@ -10,16 +10,13 @@ import Cocoa
 
 class DownloadProgressViewController: NSViewController, DownloadDelegate, ProcessEndedDelegate {
     
-    @IBOutlet weak var outputSeparatorLine: NSBox!
-    @IBOutlet weak var outputTextViewScrollView: NSScrollView!
-    @IBOutlet var outputTextView: NSTextView!
+    
+    
     @IBOutlet weak var downloadProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var playlistCountProgressIndicator: NSProgressIndicator!
     
     @IBOutlet weak var timeLeftLabel: NSTextField!
     @IBOutlet weak var videoCountLabel: NSTextField!
-    @IBOutlet weak var viewConsoleOutputStackView: NSStackView!
-    @IBOutlet weak var consoleOutputDisclosureButton: NSButton!
     @IBOutlet weak var downloadSpeedLabel: NSTextField!
     
     let downloadController = DownloadController.shared
@@ -30,17 +27,6 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     var currentVideo = 1
     var numberOfVideosInPlaylist = 1
     
-    var disclosureTriangleIsOpen = false
-    
-    var originalOutPutTextViewHeight: CGFloat = 256
-    var changedOutPutTextViewHeight: CGFloat = 256
-    
-    var viewIsExpanded = false
-    
-    var outputTextViewHeight: CGFloat {
-        return outputTextView.frame.height
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,9 +34,6 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         
         downloadController.downloadDelegate = self
-        downloadController.processEndedDelegate = self
-        
-        disclosureTriangleIsOpen = true
         
         downloadSpeedLabel.stringValue = "0KiB/s"
         videoCountLabel.stringValue = "No video downloading"
@@ -61,59 +44,11 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     }
     
     func processDidBegin() {
-        outputTextView.string = ""
+        videoCountLabel.stringValue = "Video 1 of 1"
         timeLeftLabel.stringValue = "Getting video..."
         playlistCountProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.startAnimation(self)
-        showProgressIndicatorsAndTheirLabels()
-    }
-    
-    
-    func hideProgressIndicatorsAndTheirLabels() {
-        
-        
-        
-        timeLeftLabel.isHidden = true
-        videoCountLabel.isHidden = true
-        downloadProgressIndicator.isHidden = true
-        playlistCountProgressIndicator.isHidden = true
-        outputTextView.isHidden = true
-        outputSeparatorLine.isHidden = true
-        viewConsoleOutputStackView.isHidden = true
-        
-        guard let window = self.view.window else { return }
-        var downloadViewsHiddenFrame = window.frame
-        
-        downloadViewsHiddenFrame.size.height = 120
-        window.setFrame(downloadViewsHiddenFrame, display: true, animate: true)
-        
-    }
-    
-    func showProgressIndicatorsAndTheirLabels() {
-        
-        timeLeftLabel.isHidden = false
-        videoCountLabel.isHidden = false
-        downloadProgressIndicator.isHidden = false
-        playlistCountProgressIndicator.isHidden = false
-        outputTextView.isHidden = false
-        outputSeparatorLine.isHidden = false
-        viewConsoleOutputStackView.isHidden = false
-        guard let window = self.view.window, viewIsExpanded == false else { return }
-        var downloadViewsShownFrame = window.frame
-        
-        downloadViewsShownFrame.size.height += 256
-        downloadViewsShownFrame.origin.y -= 256
-        window.setFrame(downloadViewsShownFrame, display: true, animate: true)
-        viewIsExpanded = true
-        
-    }
-    func updateTextViewWith(newLine: String) {
-        if !downloadProgressIndicatorIsAnimating { downloadProgressIndicator.startAnimation(self) }
-        outputTextView.string?.append("\n\(newLine)")
-        
-        
-        outputTextView.scrollToEndOfDocument(self)
     }
     
     func updateProgressBarWith(percentString: String?) {
@@ -132,19 +67,6 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         
         if downloadString.contains("Downloading video") {
             
-            //            print(downloadStringWords)
-            //
-            //            guard let lastString = downloadStringWords.last, let secondNumberIndex = downloadStringWords.index(of: lastString) else { return }
-            //            guard let firstNumber = Double(downloadStringWords[secondNumberIndex - 2]) else { return }
-            //
-            //            if Int(firstNumber) != currentVideo {
-            //
-            //                currentVideo = Int(firstNumber)
-            //
-            //                downloadProgressIndicator.doubleValue = firstNumber
-            //                downloadProgressIndicator.startAnimation(self)
-            //            }
-            //
             let downloadStringWords = downloadString.components(separatedBy: " ")
             
             var secondNumber = 1.0
@@ -190,6 +112,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         
         downloadSpeedLabel.stringValue = speed
     }
+    
     func parseResponseStringForETA(responseString: String) {
         let words = responseString.components(separatedBy: " ")
         
@@ -202,9 +125,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         timeLeftLabel.stringValue = "Time remaining: \(timeLeft)"
     }
     
-    
     func userHasAlreadyDownloadedVideo() {
-        
         
         timeLeftLabel.stringValue = "Video already downloaded"
         
@@ -227,7 +148,9 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         guard timeLeftLabel.stringValue != "Video already downloaded"  else { return }
         
         playlistCountProgressIndicator.doubleValue = 100
-        if downloadProgressIndicator.doubleValue != 100.0 {
+        if downloadController.userDidCancelDownload {
+            timeLeftLabel.stringValue = "Download canceled"
+        } else if downloadProgressIndicator.doubleValue != 100.0 {
             timeLeftLabel.stringValue = "Error downloading video"
         } else {
             playlistCountProgressIndicator.doubleValue = 100
@@ -235,32 +158,5 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         }
         
         downloadSpeedLabel.stringValue = "0KiB/s"
-    }
-    
-    @IBAction func viewConsoleOutputButtonTapped(_ sender: NSButton) {
-        toggleDisclosureTriangle()
-    }
-    
-    func toggleDisclosureTriangle() {
-        if disclosureTriangleIsOpen {
-            
-            changedOutPutTextViewHeight = outputTextViewHeight
-            
-            self.view.window?.change(height: -outputTextViewHeight)
-            
-            outputSeparatorLine.isHidden = true
-            outputTextViewScrollView.isHidden = true
-            
-        } else {
-            
-            self.view.window?.change(height: changedOutPutTextViewHeight)
-            
-            outputSeparatorLine.isHidden = false
-            outputTextViewScrollView.isHidden = false
-        }
-        
-        disclosureTriangleIsOpen = !disclosureTriangleIsOpen
-        
-        
     }
 }

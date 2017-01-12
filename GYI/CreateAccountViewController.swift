@@ -18,7 +18,6 @@ class CreateAccountViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
     }
     
     @IBAction func addAccountButtonTapped(_ sender: NSButton) {

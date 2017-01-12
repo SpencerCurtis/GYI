@@ -16,6 +16,7 @@ class DownloadController {
     weak var processEndedDelegate: ProcessEndedDelegate?
     
     var applicationIsDownloading = false
+    var userDidCancelDownload = false
     
     var currentTask: Process?
     
@@ -71,7 +72,6 @@ class DownloadController {
             let data = outHandle.availableData
             if data.count > 0 {
                 if let str = String(data: data, encoding: .utf8) {
-                    self.downloadDelegate?.updateTextViewWith(newLine: str)
                     let percentString = self.parseResponseForPercentComplete(responseString: str)
                     self.downloadDelegate?.updateProgressBarWith(percentString: percentString)
                     self.downloadDelegate?.updatePlaylistProgressBarWith(downloadString: str)
@@ -117,7 +117,6 @@ class DownloadController {
 
 
 protocol DownloadDelegate: class {
-    func updateTextViewWith(newLine: String)
     func updateProgressBarWith(percentString: String?)
     func updatePlaylistProgressBarWith(downloadString: String)
     func updateDownloadSpeedLabelWith(downloadString: String)
