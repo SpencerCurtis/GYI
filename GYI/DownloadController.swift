@@ -15,6 +15,10 @@ class DownloadController {
     weak var downloadDelegate: DownloadDelegate?
     weak var processEndedDelegate: ProcessEndedDelegate?
     
+    var applicationIsDownloading = false
+    
+    var currentTask: Process?
+    
     var downloadArguments: [String: String] = [:]
     
     func parseResponseForPercentComplete(responseString: String) -> String? {
@@ -58,6 +62,8 @@ class DownloadController {
         let outHandle = pipe.fileHandleForReading
         outHandle.waitForDataInBackgroundAndNotify()
         
+        currentTask = task
+        
         var dataAvailableObserver: NSObjectProtocol!
         
         dataAvailableObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outHandle, queue: nil) {  notification -> Void in
@@ -90,9 +96,22 @@ class DownloadController {
         processTerminatedObserver = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification, object: task, queue: nil) { notification -> Void in
             print("terminated")
             NotificationCenter.default.removeObserver(processTerminatedObserver)
-            self.processEndedDelegate?.processDidEnd()
+            self.applicationIsDownloading = false
+            NotificationCenter.default.post(name: processDidEndNotification, object: self)
         }
         task.launch()
+    }
+    
+    func suspendCurrentTask() {
+        currentTask?.suspend()
+    }
+    
+    func resumeCurrentTask() {
+        currentTask?.resume()
+    }
+    
+    func terminateCurrentTask() {
+        currentTask?.terminate()
     }
 }
 

@@ -9,12 +9,13 @@
 import Cocoa
 import Foundation
 
-class MainViewController: NSViewController, AccountCreationDelegate, ProcessEndedDelegate {
+class MainViewController: NSViewController, AccountCreationDelegate {
     
     @IBOutlet weak var inputTextField: NSTextField!
     @IBOutlet weak var outputPathControl: NSPathControl!
     @IBOutlet weak var accountSelectionPopUpButton: NSPopUpButtonCell!
     @IBOutlet weak var downloadProgressContainerView: NSView!
+    @IBOutlet weak var submitButton: NSButton!
     
     let downloadController = DownloadController.shared
     
@@ -25,20 +26,18 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
         super.viewDidLoad()
         
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
+        NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         
     }
     
     override func viewWillAppear() {
         
         setupAccountSelectionPopUpButton()
-        if let downloadProgressContainerView = downloadProgressContainerView {
-            containerViewOriginalHeight = downloadProgressContainerView.frame.height
-            downloadProgressContainerView.isHidden = true
-            guard let window = self.view.window else { return }
-            window.setContentSize(NSSize(width: 600, height: 120))
-            
-        }
         
+        containerViewOriginalHeight = downloadProgressContainerView.frame.height
+        downloadProgressContainerView.isHidden = true
+        guard let window = self.view.window else { return }
+        window.setContentSize(NSSize(width: 600, height: 120))
     }
     
     override var representedObject: Any? {
@@ -48,29 +47,39 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
     }
     
     func processDidEnd() {
-        downloadProgressContainerView.isHidden = true
+        submitButton.title = "Submit"
     }
     
     @IBAction func submitButtonTapped(_ sender: NSButton) {
         
         guard inputTextField.stringValue != "" else { return }
-        NotificationCenter.default.post(name: processDidBeginNotification, object: self)
-        let url = inputTextField.stringValue
-        guard let outputFolder = outputPathControl.url?.absoluteString else { return }
         
-        let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
-        
-        let output = outputWithoutPrefix + "%(title)s.%(ext)s"
-        
-        guard let selectedAccountItem = accountSelectionPopUpButton.selectedItem else { return }
-        
-        let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
-        
-        downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account)
-        
-        guard let window = self.view.window, downloadProgressContainerView.isHidden == true else { return }
-        downloadProgressContainerView.isHidden = false
-        window.change(height: containerViewOriginalHeight)
+        if downloadController.applicationIsDownloading {
+            downloadController.terminateCurrentTask()
+            submitButton.title = "Submit"
+        } else {
+            
+            submitButton.title = "Stop Download"
+            
+            downloadController.applicationIsDownloading = true
+            NotificationCenter.default.post(name: processDidBeginNotification, object: self)
+            let url = inputTextField.stringValue
+            guard let outputFolder = outputPathControl.url?.absoluteString else { return }
+            
+            let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
+            
+            let output = outputWithoutPrefix + "%(title)s.%(ext)s"
+            
+            guard let selectedAccountItem = accountSelectionPopUpButton.selectedItem else { return }
+            
+            let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
+            
+            downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account)
+            
+            guard let window = self.view.window, downloadProgressContainerView.isHidden == true else { return }
+            downloadProgressContainerView.isHidden = false
+            window.change(height: containerViewOriginalHeight)
+        }
         
     }
     
@@ -121,9 +130,12 @@ class MainViewController: NSViewController, AccountCreationDelegate, ProcessEnde
         openPanel.canChooseDirectories = true
         
         openPanel.begin { (result) in
+            
+            
             if result == NSFileHandlingPanelOKButton {
                 guard let path = openPanel.url else { print("No path selected"); return }
                 self.outputPathControl.url = path
+                self.outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.white})
                 print(path)
             }
         }
@@ -144,3 +156,4 @@ extension NSWindow {
 }
 
 var processDidBeginNotification = Notification.Name("processDidBegin")
+var processDidEndNotification = Notification.Name("processDidEnd")

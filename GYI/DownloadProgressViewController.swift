@@ -45,6 +45,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(processDidBegin), name: processDidBeginNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         
         downloadController.downloadDelegate = self
         downloadController.processEndedDelegate = self
@@ -52,6 +53,11 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         disclosureTriangleIsOpen = true
         
         downloadSpeedLabel.stringValue = "0KiB/s"
+        videoCountLabel.stringValue = "No video downloading"
+        timeLeftLabel.stringValue = "Add a video above"
+        downloadProgressIndicator.doubleValue = 0.0
+        playlistCountProgressIndicator.doubleValue = 0.0
+        
     }
     
     func processDidBegin() {
@@ -228,7 +234,6 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
             timeLeftLabel.stringValue = "Download Complete"
         }
         
-        timeLeftLabel.stringValue = "Download Complete"
         downloadSpeedLabel.stringValue = "0KiB/s"
     }
     

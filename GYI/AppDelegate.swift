@@ -24,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         guard let menuPopoverViewController = storyboard.instantiateController(withIdentifier: "MenuPopoverViewController") as? MenuPopoverViewController else { return }
         
+        popover.behavior = .semitransient
         popover.contentViewController = menuPopoverViewController
     }
     
