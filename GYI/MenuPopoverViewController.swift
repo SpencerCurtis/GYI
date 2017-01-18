@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MenuPopoverViewController: NSViewController, AccountCreationDelegate {
+class MenuPopoverViewController: NSViewController, AccountCreationDelegate, AccountDeletionDelegate {
     
     @IBOutlet weak var inputTextField: NSTextField!
     @IBOutlet weak var outputPathControl: NSPathControl!
@@ -81,8 +81,12 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate {
     }
     
     
-    @IBAction func AddNewAccountButtonTapped(_ sender: NSMenuItem) {
+    @IBAction func addNewAccountButtonTapped(_ sender: NSMenuItem) {
         addNewAccountSheet()
+    }
+    
+    @IBAction func removeAnAccountButtonClicked(_ sender: NSMenuItem) {
+        removeAnAccountSheet()
     }
     
     @IBAction func chooseOutputFolderButtonTapped(_ sender: NSButton) {
@@ -91,6 +95,10 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate {
     }
 
     func newAccountWasCreated() {
+        setupAccountSelectionPopUpButton()
+    }
+    
+    func accountWasDeleted() {
         setupAccountSelectionPopUpButton()
     }
     
@@ -106,6 +114,19 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate {
             
         })
         
+    }
+    
+
+    func removeAnAccountSheet() {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        guard let accountModificationWC = storyboard.instantiateController(withIdentifier: "AccountModificationWC") as? NSWindowController, let accountModificationVC = accountModificationWC.window?.contentViewController as? AccountModificationViewController else { return }
+        
+        accountModificationVC.delegate = self
+        
+        self.view.window?.beginSheet(accountModificationWC.window!, completionHandler: { (response) in
+            
+        })
     }
     
     func setupAccountSelectionPopUpButton() {
@@ -148,6 +169,10 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate {
             inputTextField.backgroundColor = .black
 
         }
+    }
+    
+    override func cancelOperation(_ sender: Any?) {
+        NotificationCenter.default.post(name: closePopoverNotification, object: self)
     }
 }
 

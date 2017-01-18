@@ -10,15 +10,16 @@ import Foundation
 import CoreData
 
 class AccountController {
-    
-    static let shared = AccountController()
-    
+        
     static var accounts: [Account] {
         let request: NSFetchRequest<Account> = Account.fetchRequest()
         
         let moc = CoreDataStack.context
         
-        return (try? moc.fetch(request)) ?? []
+        let results = try? moc.fetch(request)
+        
+        return results ?? []
+        
     }
     
     static func createAccountWith(title: String, username: String, password: String) {
@@ -47,9 +48,21 @@ class AccountController {
         }
     }
     
+    static func remove(account: Account) {
+        let moc = account.managedObjectContext
+        
+        moc?.delete(account)
+        saveToPersistentStore()
+        
+    }
+    
 }
 
 
 protocol AccountCreationDelegate: class {
     func newAccountWasCreated()
+}
+
+protocol AccountDeletionDelegate: class {
+    func accountWasDeleted() 
 }

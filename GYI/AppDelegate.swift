@@ -26,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         popover.behavior = .semitransient
         popover.contentViewController = menuPopoverViewController
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(closePopover(sender:)), name: closePopoverNotification, object: nil)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -51,3 +53,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+let closePopoverNotification = Notification.Name("closePopover")

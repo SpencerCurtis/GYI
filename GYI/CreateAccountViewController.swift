@@ -34,6 +34,14 @@ class CreateAccountViewController: NSViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: NSButton) {
+        dismissSheet()
+    }
+    
+    override func cancelOperation(_ sender: Any?) {
+        dismissSheet()
+    }
+    
+    func dismissSheet() {
         self.view.window?.sheetParent?.endSheet(self.view.window!)
     }
 }
