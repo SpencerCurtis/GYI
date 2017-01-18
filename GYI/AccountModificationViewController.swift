@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AccountModificationViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class AccountModificationViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, AccountCreationDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -26,7 +26,10 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         tableView.delegate = self
     }
     
-    @IBAction func removeAccountButtonTapped(_ sender: NSButton) {
+    @IBAction func addAccountButtonClicked(_ sender: NSButton) {
+        showAddAccountSheet()
+    }
+    @IBAction func removeAccountButtonClicked(_ sender: NSButton) {
         let selectedRow = tableView.selectedRow
         if tableView.numberOfSelectedRows >= 0 {
             
@@ -38,6 +41,22 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
             AccountController.remove(account: account)
         }
         
+    }
+    
+    func newAccountWasCreated() {
+        self.tableView.reloadData()
+    }
+    
+    func showAddAccountSheet() {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        guard let newAccountWC = storyboard.instantiateController(withIdentifier: "AddNewAccountWindow") as? NSWindowController, let newAccountVC = newAccountWC.window?.contentViewController as? CreateAccountViewController else { return }
+        
+        newAccountVC.delegate = self
+        
+        self.view.window?.beginSheet(newAccountWC.window!, completionHandler: { (response) in
+            
+        })
     }
     
     @IBAction func doneButtonClicked(_ sender: NSButton) {

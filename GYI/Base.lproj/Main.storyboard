@@ -492,7 +492,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="removeAccountButtonTapped:" target="sjR-89-DIl" id="FH9-QT-hXL"/>
+                                    <action selector="removeAccountButtonClicked:" target="sjR-89-DIl" id="tO2-2S-aTH"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r5a-6m-s3g">
@@ -505,11 +505,27 @@
                                     <action selector="doneButtonClicked:" target="sjR-89-DIl" id="VI4-f2-677"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-gs-Rwp">
+                                <rect key="frame" x="320" y="-1" width="20" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="YzX-s4-jJa"/>
+                                    <constraint firstAttribute="height" constant="20" id="lnX-g3-Ba2"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MiW-p4-loc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addAccountButtonClicked:" target="sjR-89-DIl" id="8lq-AP-e8b"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="r5a-6m-s3g" secondAttribute="bottom" constant="1" id="1MB-R0-1yR"/>
+                            <constraint firstItem="hbg-uq-Ky2" firstAttribute="leading" secondItem="A2i-gs-Rwp" secondAttribute="trailing" id="5DF-9Z-1oq"/>
                             <constraint firstItem="r5a-6m-s3g" firstAttribute="centerX" secondItem="QWX-sH-JKh" secondAttribute="centerX" id="9vh-FY-gxX"/>
                             <constraint firstItem="hbg-uq-Ky2" firstAttribute="top" secondItem="fRm-gI-b4r" secondAttribute="bottom" id="M22-Xf-qEv"/>
+                            <constraint firstItem="A2i-gs-Rwp" firstAttribute="centerY" secondItem="hbg-uq-Ky2" secondAttribute="centerY" id="NXi-pB-tgq"/>
                             <constraint firstItem="fRm-gI-b4r" firstAttribute="top" secondItem="QWX-sH-JKh" secondAttribute="top" id="Ro8-o5-QEw"/>
                             <constraint firstAttribute="trailing" secondItem="hbg-uq-Ky2" secondAttribute="trailing" id="Vk0-gy-HUp"/>
                             <constraint firstAttribute="bottom" secondItem="fRm-gI-b4r" secondAttribute="bottom" constant="20" id="hLl-12-4yN"/>
@@ -658,20 +674,15 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
-                                <rect key="frame" x="213" y="203" width="170" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Add New Account..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="aFP-wh-YEM" id="0Ab-qt-yhw">
+                                <rect key="frame" x="226" y="203" width="157" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="RQj-jB-YxU">
                                         <items>
-                                            <menuItem title="Add New Account..." state="on" id="aFP-wh-YEM">
+                                            <menuItem title="Manage Accounts..." id="m6L-r5-1AV">
                                                 <connections>
-                                                    <action selector="addNewAccountButtonTapped:" target="dOW-dw-HZa" id="pO5-Sc-ugK"/>
-                                                </connections>
-                                            </menuItem>
-                                            <menuItem title="Remove An Account..." id="m6L-r5-1AV">
-                                                <connections>
-                                                    <action selector="removeAnAccountButtonClicked:" target="dOW-dw-HZa" id="xgq-lU-NQI"/>
+                                                    <action selector="manageAccountsButtonClicked:" target="dOW-dw-HZa" id="KMn-ip-EpR"/>
                                                 </connections>
                                             </menuItem>
                                         </items>
@@ -836,6 +847,7 @@ Gw
         </scene>
     </scenes>
     <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

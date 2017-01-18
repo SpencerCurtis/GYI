@@ -80,13 +80,8 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         
     }
     
-    
-    @IBAction func addNewAccountButtonTapped(_ sender: NSMenuItem) {
-        addNewAccountSheet()
-    }
-    
-    @IBAction func removeAnAccountButtonClicked(_ sender: NSMenuItem) {
-        removeAnAccountSheet()
+    @IBAction func manageAccountsButtonClicked(_ sender: NSMenuItem) {
+        manageAccountsSheet()
     }
     
     @IBAction func chooseOutputFolderButtonTapped(_ sender: NSButton) {
@@ -102,31 +97,15 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         setupAccountSelectionPopUpButton()
     }
     
-    func addNewAccountSheet() {
-        
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        
-        guard let newAccountWC = storyboard.instantiateController(withIdentifier: "AddNewAccountWindow") as? NSWindowController, let newAccountVC = newAccountWC.window?.contentViewController as? CreateAccountViewController else { return }
-        
-        newAccountVC.delegate = self
-        
-        self.view.window?.beginSheet(newAccountWC.window!, completionHandler: { (response) in
-            
-        })
-        
-    }
-    
 
-    func removeAnAccountSheet() {
+    func manageAccountsSheet() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
         guard let accountModificationWC = storyboard.instantiateController(withIdentifier: "AccountModificationWC") as? NSWindowController, let accountModificationVC = accountModificationWC.window?.contentViewController as? AccountModificationViewController else { return }
         
         accountModificationVC.delegate = self
         
-        self.view.window?.beginSheet(accountModificationWC.window!, completionHandler: { (response) in
-            
-        })
+        self.view.window?.beginSheet(accountModificationWC.window!, completionHandler: nil)
     }
     
     func setupAccountSelectionPopUpButton() {
