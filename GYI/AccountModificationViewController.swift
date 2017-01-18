@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AccountModificationViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, AccountCreationDelegate {
+class AccountModificationViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, AccountCreationDelegate, NSAlertDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -33,16 +33,31 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         let selectedRow = tableView.selectedRow
         if tableView.numberOfSelectedRows >= 0 {
             
-            let indexSet = IndexSet(arrayLiteral: selectedRow)
-            tableView.removeRows(at: indexSet, withAnimation: .slideRight)
+            let alert: NSAlert = NSAlert()
+            alert.messageText =  "Are you sure you want to delete this account?"
+            alert.informativeText =  "This account's information cannot be recovered."
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            alert.delegate = self
             
-            let account = AccountController.accounts[selectedRow]
+            guard let window = self.view.window else { return }
+            alert.beginSheetModal(for: window, completionHandler: { (response) in
+                if response == NSAlertFirstButtonReturn {
+                    
+                    let indexSet = IndexSet(arrayLiteral: selectedRow)
+                    self.tableView.removeRows(at: indexSet, withAnimation: .slideRight)
+                    
+                    let account = AccountController.accounts[selectedRow]
+                    
+                    AccountController.remove(account: account)
+                }
+            })
             
-            AccountController.remove(account: account)
         }
         
     }
-    
+
     func newAccountWasCreated() {
         self.tableView.reloadData()
     }
