@@ -385,7 +385,7 @@
                                     <rect key="frame" x="1" y="0.0" width="358" height="129"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Lwi-7E-CXC" viewBased="YES" id="rjF-54-Zh1">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Lwi-7E-CXC" viewBased="YES" id="rjF-54-Zh1">
                                             <rect key="frame" x="0.0" y="-9" width="358" height="106"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -675,12 +675,12 @@ Gw
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
                                 <rect key="frame" x="226" y="186" width="157" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
+                                <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="RQj-jB-YxU">
                                         <items>
-                                            <menuItem title="Manage Accounts..." id="m6L-r5-1AV">
+                                            <menuItem title="Manage Accounts..." state="on" id="m6L-r5-1AV">
                                                 <connections>
                                                     <action selector="manageAccountsButtonClicked:" target="dOW-dw-HZa" id="KMn-ip-EpR"/>
                                                 </connections>

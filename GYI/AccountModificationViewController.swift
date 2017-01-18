@@ -12,52 +12,60 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
     
     @IBOutlet weak var tableView: NSTableView!
     
+    var selectedRow: Int?
+    weak var delegate: AccountDeletionDelegate?
+    
     private enum CellIdentifiers: String {
         case accountNameCell = "accountNameCell"
         case usernameCell = "usernameCell"
     }
-    
-    weak var delegate: AccountDeletionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setSelectedRow), name: Notification.Name.NSTableViewSelectionDidChange, object: nil)
     }
+    
     
     @IBAction func addAccountButtonClicked(_ sender: NSButton) {
         showAddAccountSheet()
     }
+    
     @IBAction func removeAccountButtonClicked(_ sender: NSButton) {
-        let selectedRow = tableView.selectedRow
-        if tableView.numberOfSelectedRows >= 0 {
-            
-            let alert: NSAlert = NSAlert()
-            alert.messageText =  "Are you sure you want to delete this account?"
-            alert.informativeText =  "This account's information cannot be recovered."
-            alert.alertStyle = NSAlertStyle.informational
-            alert.addButton(withTitle: "OK")
-            alert.addButton(withTitle: "Cancel")
-            alert.delegate = self
-            
-            guard let window = self.view.window else { return }
-            alert.beginSheetModal(for: window, completionHandler: { (response) in
-                if response == NSAlertFirstButtonReturn {
-                    
-                    let indexSet = IndexSet(arrayLiteral: selectedRow)
-                    self.tableView.removeRows(at: indexSet, withAnimation: .slideRight)
-                    
-                    let account = AccountController.accounts[selectedRow]
-                    
-                    AccountController.remove(account: account)
-                }
-            })
-            
-        }
         
+        guard let selectedRow = selectedRow else { return }
+        
+        let alert: NSAlert = NSAlert()
+        alert.messageText =  "Are you sure you want to delete this account?"
+        alert.informativeText =  "This account's information cannot be recovered."
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        
+        guard let window = self.view.window else { return }
+        alert.beginSheetModal(for: window, completionHandler: { (response) in
+            if response == NSAlertFirstButtonReturn {
+                
+                let indexSet = IndexSet(arrayLiteral: selectedRow)
+                self.tableView.removeRows(at: indexSet, withAnimation: .slideRight)
+                
+                let account = AccountController.accounts[selectedRow]
+                
+                AccountController.remove(account: account)
+                self.tableView.deselectAll(self)
+            }
+            self.selectedRow = nil
+        })
     }
-
+    
+    
+    @IBAction func doneButtonClicked(_ sender: NSButton) {
+        dismissSheet()
+    }
+    
     func newAccountWasCreated() {
         self.tableView.reloadData()
     }
@@ -74,8 +82,8 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         })
     }
     
-    @IBAction func doneButtonClicked(_ sender: NSButton) {
-        dismissSheet()
+    func setSelectedRow() {
+        self.selectedRow = tableView.selectedRow != -1 ? tableView.selectedRow : nil
     }
     
     override func cancelOperation(_ sender: Any?) {
@@ -85,6 +93,8 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
     func dismissSheet() {
         self.view.window?.sheetParent?.endSheet(self.view.window!)
     }
+    
+    // MARK: - NSTableViewDataSource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AccountController.accounts.count
