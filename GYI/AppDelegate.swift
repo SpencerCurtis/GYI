@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.contentViewController = menuPopoverViewController
         
         NotificationCenter.default.addObserver(self, selector: #selector(closePopover(sender:)), name: closePopoverNotification, object: nil)
+        togglePopover(sender: self)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -35,12 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func togglePopover(sender: Any?) {
-        if popover.isShown {
-            closePopover(sender: sender)
-        } else {
-            showPopover(sender: sender)
-        }
-        
+        popover.isShown == true ? closePopover(sender: sender) : showPopover(sender: sender)        
     }
     
     func showPopover(sender: Any?) {

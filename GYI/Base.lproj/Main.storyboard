@@ -820,10 +820,21 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-sf-UTV">
+                                <rect key="frame" x="320" y="27" width="66" height="32"/>
+                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WgC-Fy-yb5">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="quitButtonClicked:" target="tV6-fk-rnN" id="qhD-LU-vyp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="MmB-kq-j3j" secondAttribute="bottom" constant="8" id="08F-1L-uhD"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="sT2-oC-nt1" secondAttribute="bottom" constant="8" id="0kS-6M-NeD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ziq-sf-UTV" secondAttribute="trailing" constant="20" id="5D4-yr-eyj"/>
                             <constraint firstAttribute="trailing" secondItem="sT2-oC-nt1" secondAttribute="trailing" constant="20" id="6HV-Gg-1c7"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="i68-nP-9Ey" secondAttribute="bottom" constant="8" id="9b5-78-bOY"/>
                             <constraint firstItem="i68-nP-9Ey" firstAttribute="leading" secondItem="SFQ-vz-cGV" secondAttribute="leading" id="CDo-A7-cse"/>
@@ -838,12 +849,14 @@ Gw
                             <constraint firstItem="sT2-oC-nt1" firstAttribute="top" secondItem="EVf-ao-8dy" secondAttribute="top" constant="12" id="NVD-e9-1DT"/>
                             <constraint firstAttribute="trailing" secondItem="MmB-kq-j3j" secondAttribute="trailing" constant="20" id="Oe1-zL-rg9"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="sT2-oC-nt1" secondAttribute="bottom" constant="8" id="QOq-OP-cpQ"/>
+                            <constraint firstItem="Ziq-sf-UTV" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="6" id="XZ6-6g-ip3"/>
                             <constraint firstItem="RHk-Iz-KZ9" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="8" symbolic="YES" id="an7-XK-Wcf"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="leading" secondItem="EVf-ao-8dy" secondAttribute="leading" constant="20" id="deK-r4-nYF"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="leading" secondItem="RHk-Iz-KZ9" secondAttribute="leading" id="ehg-K2-v8m"/>
                             <constraint firstItem="RHk-Iz-KZ9" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="8" id="fgZ-Q5-HBr"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="i68-nP-9Ey" secondAttribute="bottom" constant="8" symbolic="YES" id="rcn-Uj-o3o"/>
                             <constraint firstAttribute="trailing" secondItem="SFQ-vz-cGV" secondAttribute="trailing" constant="20" id="tsa-31-7qy"/>
+                            <constraint firstItem="MmB-kq-j3j" firstAttribute="top" secondItem="Ziq-sf-UTV" secondAttribute="bottom" constant="6" id="ugr-AI-Hvp"/>
                             <constraint firstItem="i68-nP-9Ey" firstAttribute="leading" secondItem="EVf-ao-8dy" secondAttribute="leading" constant="20" id="zSj-sz-EsV"/>
                         </constraints>
                     </view>

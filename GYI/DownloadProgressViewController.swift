@@ -23,6 +23,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     
     var downloadProgressIndicatorIsAnimating = false
     var playlistCountProgressIndicatorIsAnimating = false
+    var applicationIsDownloadingVideo = false
     
     var currentVideo = 1
     var numberOfVideosInPlaylist = 1
@@ -52,6 +53,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         downloadProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.startAnimation(self)
         downloadSpeedLabel.isHidden = false
+        applicationIsDownloadingVideo = true
     }
     
     func updateProgressBarWith(percentString: String?) {
@@ -162,5 +164,24 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         
         downloadSpeedLabel.stringValue = "0KiB/s"
         downloadSpeedLabel.isHidden = true
+        applicationIsDownloadingVideo = false
+    }
+    
+    @IBAction func quitButtonClicked(_ sender: Any) {
+        if applicationIsDownloadingVideo {
+            let alert: NSAlert = NSAlert()
+            alert.messageText =  "You are currently downloading a video."
+            alert.informativeText =  "Do you stil want to quit GYI?"
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            
+            guard let window = self.view.window else { return }
+            alert.beginSheetModal(for: window, completionHandler: { (response) in
+                if response == NSAlertFirstButtonReturn { NSApplication.shared().terminate(self) }
+            })
+        } else {
+            NSApplication.shared().terminate(self)
+        }
     }
 }
