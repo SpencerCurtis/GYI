@@ -674,7 +674,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
-                                <rect key="frame" x="226" y="186" width="157" height="26"/>
+                                <rect key="frame" x="216" y="186" width="167" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -706,7 +706,7 @@ Gw
                                 <rect key="frame" x="20" y="110" width="360" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="252" verticalHuggingPriority="751" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-qY-vnA">
-                                <rect key="frame" x="14" y="114" width="372" height="32"/>
+                                <rect key="frame" x="212" y="114" width="174" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KRw-u6-2b5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -721,23 +721,34 @@ Gw
                                     <segue destination="tV6-fk-rnN" kind="embed" id="VGz-tl-7pY"/>
                                 </connections>
                             </containerView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-K3-swI">
+                                <rect key="frame" x="18" y="122" width="197" height="18"/>
+                                <buttonCell key="cell" type="check" title="Set as default output folder" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Bmz-qc-ToI">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="defaultOutputFolderButtonClicked:" target="dOW-dw-HZa" id="3b6-W9-w4O"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yny-2B-38p" firstAttribute="top" secondItem="R9T-5Y-tzy" secondAttribute="bottom" constant="4" id="2ha-0q-tcd"/>
                             <constraint firstAttribute="trailing" secondItem="xEC-qY-vnA" secondAttribute="trailing" constant="20" id="3q7-Mx-zHA"/>
-                            <constraint firstItem="xEC-qY-vnA" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="3qb-pm-hRZ"/>
                             <constraint firstAttribute="trailing" secondItem="aj0-F4-lZx" secondAttribute="trailing" constant="20" id="80l-5Z-P4b"/>
                             <constraint firstAttribute="trailing" secondItem="9PO-bk-4T3" secondAttribute="trailing" constant="20" id="BfU-ms-Pgu"/>
                             <constraint firstAttribute="bottom" secondItem="yny-2B-38p" secondAttribute="bottom" id="DJA-gK-ZV0"/>
                             <constraint firstItem="aj0-F4-lZx" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="Gy3-Z2-iZv"/>
                             <constraint firstItem="O0B-dq-keM" firstAttribute="top" secondItem="9PO-bk-4T3" secondAttribute="bottom" constant="9" id="Is1-x2-Ksj"/>
                             <constraint firstItem="9PO-bk-4T3" firstAttribute="top" secondItem="0K5-vz-he0" secondAttribute="bottom" constant="8" id="Jfb-Sn-hYC"/>
+                            <constraint firstItem="Gaq-K3-swI" firstAttribute="centerY" secondItem="xEC-qY-vnA" secondAttribute="centerY" id="K8a-Yr-ZiD"/>
                             <constraint firstAttribute="trailing" secondItem="R9T-5Y-tzy" secondAttribute="trailing" constant="20" id="Q7O-gZ-UU1"/>
                             <constraint firstItem="0K5-vz-he0" firstAttribute="top" secondItem="SwP-8I-5SJ" secondAttribute="top" constant="12" id="WMF-y2-vla"/>
                             <constraint firstItem="aj0-F4-lZx" firstAttribute="top" secondItem="1d4-SJ-wgv" secondAttribute="bottom" constant="8" id="Yes-Xe-z54"/>
                             <constraint firstItem="R9T-5Y-tzy" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="ZIl-Sl-S6f"/>
                             <constraint firstAttribute="trailing" secondItem="1d4-SJ-wgv" secondAttribute="trailing" constant="20" id="a8u-N8-qR9"/>
                             <constraint firstItem="R9T-5Y-tzy" firstAttribute="top" secondItem="xEC-qY-vnA" secondAttribute="bottom" constant="8" id="fHU-1l-ekv"/>
+                            <constraint firstItem="Gaq-K3-swI" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="fqU-MK-JTr"/>
                             <constraint firstItem="0K5-vz-he0" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="fy5-fO-J7U"/>
                             <constraint firstItem="O0B-dq-keM" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="gxp-A5-ePt"/>
                             <constraint firstAttribute="trailing" secondItem="yny-2B-38p" secondAttribute="trailing" id="kGC-KM-38e"/>
@@ -746,8 +757,10 @@ Gw
                             <constraint firstItem="tvH-EH-zA6" firstAttribute="top" secondItem="SwP-8I-5SJ" secondAttribute="top" constant="12" id="oHJ-sj-MFZ"/>
                             <constraint firstAttribute="trailing" secondItem="tvH-EH-zA6" secondAttribute="trailing" constant="20" id="oRa-pq-Ja7"/>
                             <constraint firstItem="yny-2B-38p" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" id="oVM-Sj-V0j"/>
+                            <constraint firstItem="xEC-qY-vnA" firstAttribute="leading" secondItem="Gaq-K3-swI" secondAttribute="trailing" constant="5" id="owR-gb-H2L"/>
                             <constraint firstAttribute="trailing" secondItem="eNV-Ey-akA" secondAttribute="trailing" constant="20" id="rM4-iD-vJ0"/>
                             <constraint firstItem="xEC-qY-vnA" firstAttribute="top" secondItem="eNV-Ey-akA" secondAttribute="bottom" constant="8" id="rsH-7W-2me"/>
+                            <constraint firstItem="1d4-SJ-wgv" firstAttribute="width" secondItem="xEC-qY-vnA" secondAttribute="width" id="s9k-Y9-ksQ"/>
                             <constraint firstItem="9PO-bk-4T3" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="tCj-bu-5ge"/>
                             <constraint firstItem="eNV-Ey-akA" firstAttribute="leading" secondItem="SwP-8I-5SJ" secondAttribute="leading" constant="20" id="wtj-js-ltD"/>
                             <constraint firstItem="eNV-Ey-akA" firstAttribute="top" secondItem="aj0-F4-lZx" secondAttribute="bottom" constant="8" id="xHV-si-5JK"/>
@@ -755,6 +768,7 @@ Gw
                     </view>
                     <connections>
                         <outlet property="accountSelectionPopUpButton" destination="0Ab-qt-yhw" id="n3W-zZ-PJb"/>
+                        <outlet property="defaultOutputFolderCheckboxButton" destination="Gaq-K3-swI" id="OEF-Ze-fii"/>
                         <outlet property="downloadProgressContainerView" destination="yny-2B-38p" id="Nf8-jl-0VW"/>
                         <outlet property="inputTextField" destination="0K5-vz-he0" id="xzQ-np-y8Z"/>
                         <outlet property="outputPathControl" destination="eNV-Ey-akA" id="bpM-rS-ekG"/>
@@ -769,8 +783,8 @@ Gw
         <scene sceneID="83a-yH-RJK">
             <objects>
                 <viewController id="tV6-fk-rnN" customClass="DownloadProgressViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="EVf-ao-8dy">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="108"/>
+                    <view key="view" id="EVf-ao-8dy">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="116"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="SFQ-vz-cGV">

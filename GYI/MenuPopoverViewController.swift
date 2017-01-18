@@ -15,6 +15,9 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
     @IBOutlet weak var accountSelectionPopUpButton: NSPopUpButtonCell!
     @IBOutlet weak var downloadProgressContainerView: NSView!
     @IBOutlet weak var submitButton: NSButton!
+    @IBOutlet weak var defaultOutputFolderCheckboxButton: NSButton!
+    
+    private let defaultOutputFolderKey = "defaultOutputFolder"
     
     let downloadController = DownloadController.shared
     var appearance: String!
@@ -23,14 +26,12 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         super.viewDidLoad()
         self.view.layer?.backgroundColor = CGColor.white
         
-        guard let window = self.view.window else { return }
-        
-        window.contentMaxSize = NSSize(width: 350, height: self.view.frame.height)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
+        guard let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) else { return }
         
-        
+        outputPathControl.url = defaultPath
+        defaultOutputFolderCheckboxButton.state = 1
     }
     
     override func viewWillAppear() {
@@ -88,7 +89,14 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         openOutputFolderPanel()
         
     }
-
+    @IBAction func defaultOutputFolderButtonClicked(_ sender: NSButton) {
+        if sender.state == 1 {
+            let path = outputPathControl.url
+            
+            UserDefaults.standard.set(path, forKey: defaultOutputFolderKey)
+        }
+    }
+    
     func newAccountWasCreated() {
         setupAccountSelectionPopUpButton()
     }
@@ -97,7 +105,7 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         setupAccountSelectionPopUpButton()
     }
     
-
+    
     func manageAccountsSheet() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
@@ -126,13 +134,14 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         
         openPanel.begin { (result) in
             
+            guard let path = openPanel.url, result == NSFileHandlingPanelOKButton else { print("No path selected"); return }
             
-            if result == NSFileHandlingPanelOKButton {
-                guard let path = openPanel.url else { print("No path selected"); return }
-                self.outputPathControl.url = path
-                if self.appearance == "Dark" {
-                    self.outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.white})
-                }
+            if self.outputPathControl.url != path { self.defaultOutputFolderCheckboxButton.state = 0 }
+            
+            self.outputPathControl.url = path
+            
+            if self.appearance == "Dark" {
+                self.outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.white})
             }
         }
     }
@@ -146,7 +155,7 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
             outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.black})
             inputTextField.focusRingType = .default
             inputTextField.backgroundColor = .black
-
+            
         }
     }
     
