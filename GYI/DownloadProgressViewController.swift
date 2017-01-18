@@ -36,6 +36,8 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         downloadController.downloadDelegate = self
         
         downloadSpeedLabel.stringValue = "0KiB/s"
+        downloadSpeedLabel.isHidden = true
+        
         videoCountLabel.stringValue = "No video downloading"
         timeLeftLabel.stringValue = "Add a video above"
         downloadProgressIndicator.doubleValue = 0.0
@@ -49,6 +51,7 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         playlistCountProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.startAnimation(self)
+        downloadSpeedLabel.isHidden = false
     }
     
     func updateProgressBarWith(percentString: String?) {
@@ -158,5 +161,6 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         }
         
         downloadSpeedLabel.stringValue = "0KiB/s"
+        downloadSpeedLabel.isHidden = true
     }
 }

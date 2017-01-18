@@ -644,11 +644,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="MenuPopoverViewController" id="dOW-dw-HZa" customClass="MenuPopoverViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="SwP-8I-5SJ">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="278"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="261"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0K5-vz-he0">
-                                <rect key="frame" x="20" y="244" width="281" height="22"/>
+                                <rect key="frame" x="20" y="227" width="281" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste Video URL Here:" drawsBackground="YES" usesSingleLineMode="YES" id="KfE-JT-FWB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -656,7 +656,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tvH-EH-zA6">
-                                <rect key="frame" x="303" y="238" width="83" height="32"/>
+                                <rect key="frame" x="303" y="221" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Submit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nbW-TJ-LRq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -666,7 +666,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O0B-dq-keM">
-                                <rect key="frame" x="18" y="209" width="103" height="17"/>
+                                <rect key="frame" x="18" y="192" width="103" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Select account:" id="7gZ-K1-uD1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -674,7 +674,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
-                                <rect key="frame" x="226" y="203" width="157" height="26"/>
+                                <rect key="frame" x="226" y="186" width="157" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -690,23 +690,23 @@ Gw
                                 </popUpButtonCell>
                             </popUpButton>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-bk-4T3">
-                                <rect key="frame" x="20" y="233" width="360" height="5"/>
+                                <rect key="frame" x="20" y="216" width="360" height="5"/>
                             </box>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-F4-lZx">
-                                <rect key="frame" x="20" y="195" width="360" height="5"/>
+                                <rect key="frame" x="20" y="178" width="360" height="5"/>
                             </box>
                             <pathControl horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNV-Ey-akA">
-                                <rect key="frame" x="20" y="167" width="360" height="22"/>
+                                <rect key="frame" x="20" y="150" width="360" height="22"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="odh-Ep-tOe">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Users/SpencerCurtis/Desktop/"/>
                                 </pathCell>
                             </pathControl>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-5Y-tzy">
-                                <rect key="frame" x="20" y="127" width="360" height="5"/>
+                                <rect key="frame" x="20" y="110" width="360" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="252" verticalHuggingPriority="751" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-qY-vnA">
-                                <rect key="frame" x="14" y="131" width="372" height="32"/>
+                                <rect key="frame" x="14" y="114" width="372" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KRw-u6-2b5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -716,7 +716,7 @@ Gw
                                 </connections>
                             </button>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="yny-2B-38p">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="125"/>
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="108"/>
                                 <connections>
                                     <segue destination="tV6-fk-rnN" kind="embed" id="VGz-tl-7pY"/>
                                 </connections>
@@ -763,14 +763,14 @@ Gw
                 </viewController>
                 <customObject id="UsI-50-DPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="70" y="79"/>
+            <point key="canvasLocation" x="70" y="70.5"/>
         </scene>
         <!--Download Progress View Controller-->
         <scene sceneID="83a-yH-RJK">
             <objects>
                 <viewController id="tV6-fk-rnN" customClass="DownloadProgressViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="EVf-ao-8dy">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="116"/>
+                    <view key="view" misplaced="YES" id="EVf-ao-8dy">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="SFQ-vz-cGV">
@@ -843,7 +843,7 @@ Gw
                 </viewController>
                 <customObject id="P74-6L-TvX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="70" y="398"/>
+            <point key="canvasLocation" x="70" y="394"/>
         </scene>
     </scenes>
     <resources>
