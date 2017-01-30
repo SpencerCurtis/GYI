@@ -30,7 +30,50 @@ class DownloadController {
         return percentString
     }
     
-    
+    func updateYoutubeDLExecutable() {
+        let task = Process()
+        guard let path = Bundle.main.resourcePath else { return }
+        var fullPath = path
+        fullPath.append("/youtube-dl")
+        task.launchPath = fullPath
+        
+        let updateArgument = "-U"
+        
+        task.arguments = [updateArgument]
+        
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        let outHandle = pipe.fileHandleForReading
+        outHandle.waitForDataInBackgroundAndNotify()
+        
+        currentTask = task
+        
+        var dataAvailableObserver: NSObjectProtocol!
+        
+        dataAvailableObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outHandle, queue: nil) {  notification -> Void in
+            
+            let data = outHandle.availableData
+            if data.count > 0 {
+                if let str = String(data: data, encoding: .utf8) {
+                    print(str)
+                    
+                }
+                outHandle.waitForDataInBackgroundAndNotify()
+            } else {
+                print("EOF on stdout from process")
+                NotificationCenter.default.removeObserver(dataAvailableObserver)
+            }
+        }
+        
+        var processTerminatedObserver: NSObjectProtocol!
+        
+        processTerminatedObserver = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification, object: task, queue: nil) { notification -> Void in
+            print("terminated")
+            NotificationCenter.default.removeObserver(processTerminatedObserver)
+        }
+        task.launch()
+    }
     
     func downloadVideoAt(videoURL: String, outputFolder: String, account: Account? = nil) {
         

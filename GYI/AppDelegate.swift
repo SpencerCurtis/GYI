@@ -29,6 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(closePopover(sender:)), name: closePopoverNotification, object: nil)
         togglePopover(sender: self)
+        
+        DownloadController.shared.updateYoutubeDLExecutable()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
