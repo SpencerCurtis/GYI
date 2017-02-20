@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -644,11 +644,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="MenuPopoverViewController" id="dOW-dw-HZa" customClass="MenuPopoverViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="SwP-8I-5SJ">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="261"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0K5-vz-he0">
-                                <rect key="frame" x="20" y="227" width="281" height="22"/>
+                                <rect key="frame" x="20" y="266" width="281" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste Video URL Here:" drawsBackground="YES" usesSingleLineMode="YES" id="KfE-JT-FWB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -656,7 +656,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tvH-EH-zA6">
-                                <rect key="frame" x="303" y="221" width="83" height="32"/>
+                                <rect key="frame" x="303" y="260" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Submit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nbW-TJ-LRq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -666,7 +666,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O0B-dq-keM">
-                                <rect key="frame" x="18" y="192" width="103" height="17"/>
+                                <rect key="frame" x="18" y="231" width="103" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Select account:" id="7gZ-K1-uD1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -674,7 +674,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
-                                <rect key="frame" x="216" y="186" width="167" height="26"/>
+                                <rect key="frame" x="216" y="225" width="167" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -690,23 +690,23 @@ Gw
                                 </popUpButtonCell>
                             </popUpButton>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-bk-4T3">
-                                <rect key="frame" x="20" y="216" width="360" height="5"/>
+                                <rect key="frame" x="20" y="255" width="360" height="5"/>
                             </box>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-F4-lZx">
-                                <rect key="frame" x="20" y="178" width="360" height="5"/>
+                                <rect key="frame" x="20" y="217" width="360" height="5"/>
                             </box>
                             <pathControl horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNV-Ey-akA">
-                                <rect key="frame" x="20" y="150" width="360" height="22"/>
+                                <rect key="frame" x="20" y="189" width="360" height="22"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="odh-Ep-tOe">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Users/SpencerCurtis/Desktop/"/>
                                 </pathCell>
                             </pathControl>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-5Y-tzy">
-                                <rect key="frame" x="20" y="110" width="360" height="5"/>
+                                <rect key="frame" x="20" y="149" width="360" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="252" verticalHuggingPriority="751" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-qY-vnA">
-                                <rect key="frame" x="212" y="114" width="174" height="32"/>
+                                <rect key="frame" x="212" y="153" width="174" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KRw-u6-2b5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -716,13 +716,13 @@ Gw
                                 </connections>
                             </button>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="yny-2B-38p">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="108"/>
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="147"/>
                                 <connections>
                                     <segue destination="tV6-fk-rnN" kind="embed" id="VGz-tl-7pY"/>
                                 </connections>
                             </containerView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-K3-swI">
-                                <rect key="frame" x="18" y="122" width="197" height="18"/>
+                                <rect key="frame" x="18" y="161" width="197" height="18"/>
                                 <buttonCell key="cell" type="check" title="Set as default output folder" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Bmz-qc-ToI">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -777,27 +777,27 @@ Gw
                 </viewController>
                 <customObject id="UsI-50-DPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="70" y="70.5"/>
+            <point key="canvasLocation" x="70" y="92.5"/>
         </scene>
         <!--Download Progress View Controller-->
         <scene sceneID="83a-yH-RJK">
             <objects>
                 <viewController id="tV6-fk-rnN" customClass="DownloadProgressViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="EVf-ao-8dy">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="116"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="147"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="SFQ-vz-cGV">
-                                <rect key="frame" x="20" y="60" width="360" height="20"/>
+                                <rect key="frame" x="20" y="91" width="360" height="20"/>
                             </progressIndicator>
                             <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MmB-kq-j3j">
-                                <rect key="frame" x="20" y="7" width="360" height="22"/>
+                                <rect key="frame" x="20" y="38" width="360" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="hXN-m2-Xaf"/>
                                 </constraints>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i68-nP-9Ey">
-                                <rect key="frame" x="18" y="87" width="97" height="17"/>
+                                <rect key="frame" x="18" y="118" width="97" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Getting video..." id="Ggb-sg-0Y9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -805,7 +805,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RHk-Iz-KZ9">
-                                <rect key="frame" x="18" y="36" width="74" height="17"/>
+                                <rect key="frame" x="18" y="67" width="74" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Video 1 of 1" id="0gT-Rd-bAM">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -813,15 +813,25 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sT2-oC-nt1">
-                                <rect key="frame" x="245" y="87" width="137" height="17"/>
+                                <rect key="frame" x="245" y="118" width="137" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Download Speed here" id="fSg-uz-Jn3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="qXl-J5-9v3">
+                                <rect key="frame" x="18" y="11" width="220" height="18"/>
+                                <buttonCell key="cell" type="check" title="Automatically update youtube-dl" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="JUe-Sb-ISy">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="automaticallyUpdateYoutubeDLCheckboxButtonClicked:" target="tV6-fk-rnN" id="aE8-nw-fHo"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-sf-UTV">
-                                <rect key="frame" x="320" y="27" width="66" height="32"/>
+                                <rect key="frame" x="320" y="3" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WgC-Fy-yb5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -832,10 +842,11 @@ Gw
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="MmB-kq-j3j" secondAttribute="bottom" constant="8" id="08F-1L-uhD"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="sT2-oC-nt1" secondAttribute="bottom" constant="8" id="0kS-6M-NeD"/>
-                            <constraint firstAttribute="trailing" secondItem="Ziq-sf-UTV" secondAttribute="trailing" constant="20" id="5D4-yr-eyj"/>
+                            <constraint firstItem="Ziq-sf-UTV" firstAttribute="top" secondItem="MmB-kq-j3j" secondAttribute="bottom" constant="8" id="0o2-7E-0DU"/>
+                            <constraint firstAttribute="trailing" secondItem="Ziq-sf-UTV" secondAttribute="trailing" constant="20" id="3fQ-yz-Lt3"/>
                             <constraint firstAttribute="trailing" secondItem="sT2-oC-nt1" secondAttribute="trailing" constant="20" id="6HV-Gg-1c7"/>
+                            <constraint firstItem="qXl-J5-9v3" firstAttribute="top" secondItem="MmB-kq-j3j" secondAttribute="bottom" constant="12" id="7b5-v2-Jy0"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="i68-nP-9Ey" secondAttribute="bottom" constant="8" id="9b5-78-bOY"/>
                             <constraint firstItem="i68-nP-9Ey" firstAttribute="leading" secondItem="SFQ-vz-cGV" secondAttribute="leading" id="CDo-A7-cse"/>
                             <constraint firstItem="RHk-Iz-KZ9" firstAttribute="leading" secondItem="MmB-kq-j3j" secondAttribute="leading" id="DJz-Bx-5Wn"/>
@@ -849,14 +860,13 @@ Gw
                             <constraint firstItem="sT2-oC-nt1" firstAttribute="top" secondItem="EVf-ao-8dy" secondAttribute="top" constant="12" id="NVD-e9-1DT"/>
                             <constraint firstAttribute="trailing" secondItem="MmB-kq-j3j" secondAttribute="trailing" constant="20" id="Oe1-zL-rg9"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="sT2-oC-nt1" secondAttribute="bottom" constant="8" id="QOq-OP-cpQ"/>
-                            <constraint firstItem="Ziq-sf-UTV" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="6" id="XZ6-6g-ip3"/>
+                            <constraint firstItem="qXl-J5-9v3" firstAttribute="leading" secondItem="EVf-ao-8dy" secondAttribute="leading" constant="20" id="TP3-6m-Nox"/>
                             <constraint firstItem="RHk-Iz-KZ9" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="8" symbolic="YES" id="an7-XK-Wcf"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="leading" secondItem="EVf-ao-8dy" secondAttribute="leading" constant="20" id="deK-r4-nYF"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="leading" secondItem="RHk-Iz-KZ9" secondAttribute="leading" id="ehg-K2-v8m"/>
                             <constraint firstItem="RHk-Iz-KZ9" firstAttribute="top" secondItem="SFQ-vz-cGV" secondAttribute="bottom" constant="8" id="fgZ-Q5-HBr"/>
                             <constraint firstItem="SFQ-vz-cGV" firstAttribute="top" secondItem="i68-nP-9Ey" secondAttribute="bottom" constant="8" symbolic="YES" id="rcn-Uj-o3o"/>
                             <constraint firstAttribute="trailing" secondItem="SFQ-vz-cGV" secondAttribute="trailing" constant="20" id="tsa-31-7qy"/>
-                            <constraint firstItem="MmB-kq-j3j" firstAttribute="top" secondItem="Ziq-sf-UTV" secondAttribute="bottom" constant="6" id="ugr-AI-Hvp"/>
                             <constraint firstItem="i68-nP-9Ey" firstAttribute="leading" secondItem="EVf-ao-8dy" secondAttribute="leading" constant="20" id="zSj-sz-EsV"/>
                         </constraints>
                     </view>
@@ -870,7 +880,7 @@ Gw
                 </viewController>
                 <customObject id="P74-6L-TvX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="70" y="394"/>
+            <point key="canvasLocation" x="70" y="409.5"/>
         </scene>
     </scenes>
     <resources>

@@ -8,9 +8,7 @@
 
 import Cocoa
 
-class DownloadProgressViewController: NSViewController, DownloadDelegate, ProcessEndedDelegate {
-    
-    
+class DownloadProgressViewController: NSViewController, DownloadDelegate, ProcessEndedDelegate, CAAnimationDelegate {
     
     @IBOutlet weak var downloadProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var playlistCountProgressIndicator: NSProgressIndicator!
@@ -181,7 +179,20 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
                 if response == NSAlertFirstButtonReturn { NSApplication.shared().terminate(self) }
             })
         } else {
-            NSApplication.shared().terminate(self)
+            downloadController.popover?.performClose(nil)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(terminateApp), userInfo: nil, repeats: false)
+        }
+    }
+    
+    func terminateApp() {
+        NSApplication.shared().terminate(_:self)
+    }
+    
+    @IBAction func automaticallyUpdateYoutubeDLCheckboxButtonClicked(_ sender: NSButton) {
+        switch sender.state {
+        case 0: UserDefaults.standard.set(false, forKey: downloadController.autoUpdateYoutubeDLKey)
+        case 1: UserDefaults.standard.set(true, forKey: downloadController.autoUpdateYoutubeDLKey)
+        default: break
         }
     }
 }

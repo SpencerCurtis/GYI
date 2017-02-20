@@ -7,16 +7,25 @@
 //
 
 import Foundation
+import Cocoa
 
 class DownloadController {
     
     static let shared = DownloadController()
+    
+    weak var popover: NSPopover? {
+        didSet {
+            print("Popover was set")
+        }
+    }
     
     weak var downloadDelegate: DownloadDelegate?
     weak var processEndedDelegate: ProcessEndedDelegate?
     
     var applicationIsDownloading = false
     var userDidCancelDownload = false
+    
+    let autoUpdateYoutubeDLKey = "autoUpdateYoutubeDL"
     
     var currentTask: Process?
     

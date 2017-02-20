@@ -114,9 +114,9 @@
 		46CCE5B11E0309F50005239C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				46D41C4C1E2ED71900F50104 /* AccountModificationViewController.swift */,
 				46FC3B201E27F9ED007D89B6 /* MenuPopoverViewController.swift */,
 				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
+				46D41C4C1E2ED71900F50104 /* AccountModificationViewController.swift */,
 				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
 			);
 			name = "View Controllers";

@@ -27,9 +27,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .semitransient
         popover.contentViewController = menuPopoverViewController
         
+        DownloadController.shared.popover = self.popover
+        
         NotificationCenter.default.addObserver(self, selector: #selector(closePopover(sender:)), name: closePopoverNotification, object: nil)
         togglePopover(sender: self)
         
+        
+        guard UserDefaults.standard.bool(forKey: DownloadController.shared.autoUpdateYoutubeDLKey) == true else { return }
         DownloadController.shared.updateYoutubeDLExecutable()
     }
     
