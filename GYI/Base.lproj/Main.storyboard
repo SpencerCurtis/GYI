@@ -643,12 +643,12 @@ Gw
         <scene sceneID="BFO-UE-Ucb">
             <objects>
                 <viewController storyboardIdentifier="MenuPopoverViewController" id="dOW-dw-HZa" customClass="MenuPopoverViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" id="SwP-8I-5SJ">
+                    <view key="view" autoresizesSubviews="NO" misplaced="YES" id="SwP-8I-5SJ">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0K5-vz-he0">
-                                <rect key="frame" x="20" y="266" width="281" height="22"/>
+                                <rect key="frame" x="20" y="266" width="319" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste Video URL Here:" drawsBackground="YES" usesSingleLineMode="YES" id="KfE-JT-FWB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -656,7 +656,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tvH-EH-zA6">
-                                <rect key="frame" x="303" y="260" width="83" height="32"/>
+                                <rect key="frame" x="341" y="260" width="83" height="32"/>
                                 <buttonCell key="cell" type="push" title="Submit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nbW-TJ-LRq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -674,7 +674,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-SJ-wgv">
-                                <rect key="frame" x="216" y="225" width="167" height="26"/>
+                                <rect key="frame" x="254" y="225" width="167" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Manage Accounts..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="m6L-r5-1AV" id="0Ab-qt-yhw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -690,23 +690,23 @@ Gw
                                 </popUpButtonCell>
                             </popUpButton>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-bk-4T3">
-                                <rect key="frame" x="20" y="255" width="360" height="5"/>
+                                <rect key="frame" x="20" y="255" width="398" height="5"/>
                             </box>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-F4-lZx">
-                                <rect key="frame" x="20" y="217" width="360" height="5"/>
+                                <rect key="frame" x="20" y="217" width="398" height="5"/>
                             </box>
                             <pathControl horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNV-Ey-akA">
-                                <rect key="frame" x="20" y="189" width="360" height="22"/>
+                                <rect key="frame" x="20" y="189" width="398" height="22"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="odh-Ep-tOe">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Users/SpencerCurtis/Desktop/"/>
                                 </pathCell>
                             </pathControl>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-5Y-tzy">
-                                <rect key="frame" x="20" y="149" width="360" height="5"/>
+                                <rect key="frame" x="20" y="149" width="398" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="252" verticalHuggingPriority="751" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-qY-vnA">
-                                <rect key="frame" x="212" y="153" width="174" height="32"/>
+                                <rect key="frame" x="250" y="153" width="174" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KRw-u6-2b5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -716,13 +716,13 @@ Gw
                                 </connections>
                             </button>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="yny-2B-38p">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="147"/>
+                                <rect key="frame" x="0.0" y="0.0" width="438" height="147"/>
                                 <connections>
                                     <segue destination="tV6-fk-rnN" kind="embed" id="VGz-tl-7pY"/>
                                 </connections>
                             </containerView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-K3-swI">
-                                <rect key="frame" x="18" y="161" width="197" height="18"/>
+                                <rect key="frame" x="18" y="161" width="235" height="18"/>
                                 <buttonCell key="cell" type="check" title="Set as default output folder" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Bmz-qc-ToI">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -871,6 +871,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="automaticallyUpdateYoutubeDLCheckboxButton" destination="qXl-J5-9v3" id="1aX-WC-mza"/>
                         <outlet property="downloadProgressIndicator" destination="SFQ-vz-cGV" id="r3e-9O-xex"/>
                         <outlet property="downloadSpeedLabel" destination="sT2-oC-nt1" id="hoA-Nl-p9F"/>
                         <outlet property="playlistCountProgressIndicator" destination="MmB-kq-j3j" id="0v6-SH-bnD"/>

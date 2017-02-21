@@ -17,6 +17,8 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
     @IBOutlet weak var videoCountLabel: NSTextField!
     @IBOutlet weak var downloadSpeedLabel: NSTextField!
     
+    @IBOutlet weak var automaticallyUpdateYoutubeDLCheckboxButton: NSButton!
+    
     let downloadController = DownloadController.shared
     
     var downloadProgressIndicatorIsAnimating = false
@@ -41,6 +43,10 @@ class DownloadProgressViewController: NSViewController, DownloadDelegate, Proces
         timeLeftLabel.stringValue = "Add a video above"
         downloadProgressIndicator.doubleValue = 0.0
         playlistCountProgressIndicator.doubleValue = 0.0
+        
+        let userWantsAutoUpdate = UserDefaults.standard.bool(forKey: downloadController.autoUpdateYoutubeDLKey)
+        
+        automaticallyUpdateYoutubeDLCheckboxButton.state = userWantsAutoUpdate ? NSOnState : NSOffState
         
     }
     
