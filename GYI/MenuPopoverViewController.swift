@@ -134,7 +134,7 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         
         openPanel.begin { (result) in
             
-            guard let path = openPanel.url, result == NSFileHandlingPanelOKButton else { print("No path selected"); return }
+            guard let path = openPanel.url, result == NSFileHandlingPanelOKButton else { return }
             
             if self.outputPathControl.url != path { self.defaultOutputFolderCheckboxButton.state = 0 }
             
@@ -150,12 +150,10 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         if appearance == "Dark" {
             outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.white})
             inputTextField.focusRingType = .none
-            inputTextField.backgroundColor = .clear
         } else {
             outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.black})
             inputTextField.focusRingType = .default
-            inputTextField.backgroundColor = .black
-            
+            inputTextField.backgroundColor = .clear
         }
     }
     
