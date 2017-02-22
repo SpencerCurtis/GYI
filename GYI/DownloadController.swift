@@ -21,6 +21,7 @@ class DownloadController {
     
     weak var downloadDelegate: DownloadDelegate?
     weak var processEndedDelegate: ProcessEndedDelegate?
+    weak var executableUpdateDelegate: ExecutableUpdateDelegate?
     
     var applicationIsDownloading = false
     var userDidCancelDownload = false
@@ -66,7 +67,9 @@ class DownloadController {
             if data.count > 0 {
                 if let str = String(data: data, encoding: .utf8) {
                     print(str)
-                    
+                    if str.contains("Updating") {
+                        
+                    }
                 }
                 outHandle.waitForDataInBackgroundAndNotify()
             } else {
@@ -178,4 +181,9 @@ protocol DownloadDelegate: class {
 
 protocol ProcessEndedDelegate: class {
     func processDidEnd()
+}
+
+protocol ExecutableUpdateDelegate: class {
+    func executableDidBeginUpdateWith(dataString: String)
+    func executableDidFinishUpdatingWith(dataString: String)
 }

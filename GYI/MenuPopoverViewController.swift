@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MenuPopoverViewController: NSViewController, AccountCreationDelegate, AccountDeletionDelegate {
+class MenuPopoverViewController: NSViewController, AccountCreationDelegate, AccountDeletionDelegate, ExecutableUpdateDelegate {
     
     @IBOutlet weak var inputTextField: NSTextField!
     @IBOutlet weak var outputPathControl: NSPathControl!
@@ -28,9 +28,14 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
-        guard let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) else { return }
-        
-        outputPathControl.url = defaultPath
+        if let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) {
+            
+            outputPathControl.url = defaultPath
+            print(outputPathControl.url!)
+        } else {
+            
+            outputPathControl.url = URL(string: "file:///Users/\(NSUserName)/Downloads")
+        }
         defaultOutputFolderCheckboxButton.state = 1
     }
     
@@ -85,17 +90,8 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         manageAccountsSheet()
     }
     
-    @IBAction func chooseOutputFolderButtonTapped(_ sender: NSButton) {
-        openOutputFolderPanel()
-        
-    }
-    @IBAction func defaultOutputFolderButtonClicked(_ sender: NSButton) {
-        if sender.state == 1 {
-            let path = outputPathControl.url
-            
-            UserDefaults.standard.set(path, forKey: defaultOutputFolderKey)
-        }
-    }
+    
+    // MARK: - Account Creation/Deletion Delegates
     
     func newAccountWasCreated() {
         setupAccountSelectionPopUpButton()
@@ -127,6 +123,21 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         }
     }
     
+    // MARK: - Output folder selection
+    
+    @IBAction func chooseOutputFolderButtonTapped(_ sender: NSButton) {
+        openOutputFolderPanel()
+        
+    }
+    
+    @IBAction func defaultOutputFolderButtonClicked(_ sender: NSButton) {
+        if sender.state == 1 {
+            let path = outputPathControl.url
+            
+            UserDefaults.standard.set(path, forKey: defaultOutputFolderKey)
+        }
+    }
+    
     func openOutputFolderPanel() {
         let openPanel = NSOpenPanel()
         
@@ -148,6 +159,16 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         }
     }
     
+    func executableDidBeginUpdateWith(dataString: String) {
+        
+    }
+    
+    func executableDidFinishUpdatingWith(dataString: String) {
+        
+    }
+    
+    // MARK: - Appearance
+    
     func changeAppearanceForMenuStyle() {
         if appearance == "Dark" {
             outputPathControl.pathComponentCells().forEach({$0.textColor = NSColor.white})
@@ -158,6 +179,8 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
             inputTextField.backgroundColor = .clear
         }
     }
+    
+    // MARK: - Other
     
     override func cancelOperation(_ sender: Any?) {
         NotificationCenter.default.post(name: closePopoverNotification, object: self)
