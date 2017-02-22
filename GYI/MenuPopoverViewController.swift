@@ -8,8 +8,9 @@
 
 import Cocoa
 
-class MenuPopoverViewController: NSViewController, AccountCreationDelegate, AccountDeletionDelegate, ExecutableUpdateDelegate {
+class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCreationDelegate, AccountDeletionDelegate, ExecutableUpdateDelegate {
     
+    // MARK: - Properties
     @IBOutlet weak var inputTextField: NSTextField!
     @IBOutlet weak var outputPathControl: NSPathControl!
     @IBOutlet weak var accountSelectionPopUpButton: NSPopUpButtonCell!
@@ -19,12 +20,19 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
     
     private let defaultOutputFolderKey = "defaultOutputFolder"
     
+    var executableUpdatingView: NSView!
+    
     let downloadController = DownloadController.shared
     var appearance: String!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.layer?.backgroundColor = CGColor.white
+        
+        //        setupExecutableUpdatingView()
+        //
         
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
@@ -33,21 +41,18 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
             outputPathControl.url = defaultPath
             print(outputPathControl.url!)
         } else {
-            
             outputPathControl.url = URL(string: "file:///Users/\(NSUserName)/Downloads")
         }
+        
         defaultOutputFolderCheckboxButton.state = 1
+        
+        guard let popover = downloadController.popover else { return }
+        popover.delegate = self
     }
     
     override func viewWillAppear() {
         
         setupAccountSelectionPopUpButton()
-        
-        appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
-        
-        setupAccountSelectionPopUpButton()
-        
-        changeAppearanceForMenuStyle()
     }
     
     func processDidEnd() {
@@ -159,13 +164,36 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         }
     }
     
+    // MARK: - ExecutableUpdateDelegate
+    
     func executableDidBeginUpdateWith(dataString: String) {
-        
+        self.view.addSubview(self.executableUpdatingView, positioned: .above, relativeTo: nil)
     }
     
     func executableDidFinishUpdatingWith(dataString: String) {
         
     }
+    
+    func setupExecutableUpdatingView() {
+        let executableUpdatingView = NSView(frame: self.view.frame)
+        executableUpdatingView.wantsLayer = true
+        
+        executableUpdatingView.layer?.backgroundColor = appearance == "Dark" ? .white : .black
+        
+        self.executableUpdatingView = executableUpdatingView
+        
+        // WARNING: - Remove this. This is only for testing.
+        self.view.addSubview(self.executableUpdatingView, positioned: .above, relativeTo: nil)
+        
+    }
+    
+    func popoverWillShow(_ notification: Notification) {
+        appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
+        changeAppearanceForMenuStyle()
+        guard let executableUpdatingView = executableUpdatingView else { return }
+        executableUpdatingView.layer?.backgroundColor = appearance == "Dark" ? .white : .black
+    }
+    
     
     // MARK: - Appearance
     

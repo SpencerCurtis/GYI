@@ -68,7 +68,9 @@ class DownloadController {
                 if let str = String(data: data, encoding: .utf8) {
                     print(str)
                     if str.contains("Updating") {
-                        
+                        self.executableUpdateDelegate?.executableDidBeginUpdateWith(dataString: str)
+                    } else if str.contains("Updated") {
+                        self.executableUpdateDelegate?.executableDidFinishUpdatingWith(dataString: str)
                     }
                 }
                 outHandle.waitForDataInBackgroundAndNotify()
