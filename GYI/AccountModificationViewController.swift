@@ -51,11 +51,13 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
                 
                 let indexSet = IndexSet(arrayLiteral: selectedRow)
                 self.tableView.removeRows(at: indexSet, withAnimation: .slideRight)
+                self.tableView.deselectAll(self)
                 
                 let account = AccountController.accounts[selectedRow]
                 
+                guard let title = account.title else { return }
+                self.delegate?.accountWasDeletedWith(title: title)
                 AccountController.remove(account: account)
-                self.tableView.deselectAll(self)
             }
             self.selectedRow = nil
         })

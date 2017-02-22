@@ -101,19 +101,21 @@ class MenuPopoverViewController: NSViewController, AccountCreationDelegate, Acco
         setupAccountSelectionPopUpButton()
     }
     
-    func accountWasDeleted() {
-        setupAccountSelectionPopUpButton()
+    func accountWasDeletedWith(title: String) {
+        accountSelectionPopUpButton.removeItem(withTitle: title)
     }
     
     
     func manageAccountsSheet() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
-        guard let accountModificationWC = storyboard.instantiateController(withIdentifier: "AccountModificationWC") as? NSWindowController, let accountModificationVC = accountModificationWC.window?.contentViewController as? AccountModificationViewController else { return }
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "AccountModificationWC") as? NSWindowController), let window = accountModificationWC.window,
+            let accountModificationVC = window.contentViewController as? AccountModificationViewController else { return }
         
         accountModificationVC.delegate = self
-        
-        self.view.window?.beginSheet(accountModificationWC.window!, completionHandler: nil)
+        self.view.window?.beginSheet(window, completionHandler: { (response) in
+            self.setupAccountSelectionPopUpButton()
+        })
     }
     
     func setupAccountSelectionPopUpButton() {

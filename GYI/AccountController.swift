@@ -64,5 +64,5 @@ protocol AccountCreationDelegate: class {
 }
 
 protocol AccountDeletionDelegate: class {
-    func accountWasDeleted() 
+    func accountWasDeletedWith(title: String)
 }
