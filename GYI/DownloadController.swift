@@ -99,7 +99,7 @@ class DownloadController {
         
         let ignoreConfig = "--ignore-config"
         
-        let output = "\(outputFolder)%(title)s.%(ext)s"
+        let output = "\(outputFolder)"
         
         //        let skipDownloadTEST = "--skip-download"
         
