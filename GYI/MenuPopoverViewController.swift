@@ -21,6 +21,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     private let defaultOutputFolderKey = "defaultOutputFolder"
     
     var executableUpdatingView: NSView!
+    var userDidCancelDownload = false
     
     let downloadController = DownloadController.shared
     var appearance: String!
@@ -57,6 +58,8 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     
     func processDidEnd() {
         submitButton.title = "Submit"
+        
+        if !userDidCancelDownload { inputTextField.stringValue = "" }
     }
     
     
