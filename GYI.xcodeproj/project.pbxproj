@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		463EACD51E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */; };
 		46CCE5861E0309510005239C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5851E0309510005239C /* AppDelegate.swift */; };
 		46CCE58A1E0309510005239C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE5891E0309510005239C /* Assets.xcassets */; };
 		46CCE58D1E0309510005239C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE58B1E0309510005239C /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPasswordSubmissionViewController.swift; path = GYI/VideoPasswordSubmissionViewController.swift; sourceTree = "<group>"; };
 		46CCE5821E0309510005239C /* GYI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CCE5851E0309510005239C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46CCE5891E0309510005239C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
 				46D41C4C1E2ED71900F50104 /* AccountModificationViewController.swift */,
 				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
+				463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */,
 			);
 			name = "View Controllers";
 			path = ..;
@@ -214,6 +217,7 @@
 				46CCE5AC1E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld in Sources */,
 				46D41C4D1E2ED71900F50104 /* AccountModificationViewController.swift in Sources */,
 				46CCE5A81E0309AB0005239C /* DownloadProgressViewController.swift in Sources */,
+				463EACD51E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

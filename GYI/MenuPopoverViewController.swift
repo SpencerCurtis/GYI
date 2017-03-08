@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCreationDelegate, AccountDeletionDelegate, ExecutableUpdateDelegate {
+class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCreationDelegate, AccountDeletionDelegate, ExecutableUpdateDelegate, VideoPasswordSubmissionDelegate {
     
     // MARK: - Properties
     @IBOutlet weak var inputTextField: NSTextField!
@@ -32,10 +32,9 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         self.view.layer?.backgroundColor = CGColor.white
         
-        //        setupExecutableUpdatingView()
-        //
-        
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentPasswordProtectedVideoAlert)    , name: downloadController.videoIsPasswordProtectedNotification, object: nil)
+        
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
         if let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) {
             
@@ -73,25 +72,51 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
             downloadController.userDidCancelDownload = true
             
         } else {
-            
-            submitButton.title = "Stop Download"
-            
-            downloadController.applicationIsDownloading = true
-            NotificationCenter.default.post(name: processDidBeginNotification, object: self)
-            let url = inputTextField.stringValue
-            guard let outputFolder = outputPathControl.url?.absoluteString else { return }
-            
-            let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
-            
-            let output = outputWithoutPrefix + "%(title)s.%(ext)s"
-            
-            guard let selectedAccountItem = accountSelectionPopUpButton.selectedItem else { return }
-            
-            let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
-            
-            downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account)
+            beginDownloadOfVideoWith(url: inputTextField.stringValue)
         }
         
+    }
+    
+    func beginDownloadOfVideoWith(url: String) {
+        submitButton.title = "Stop Download"
+        
+        downloadController.applicationIsDownloading = true
+        NotificationCenter.default.post(name: processDidBeginNotification, object: self)
+        
+        guard let outputFolder = outputPathControl.url?.absoluteString else { return }
+        
+        let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
+        
+        let output = outputWithoutPrefix + "%(title)s.%(ext)s"
+        
+        guard let selectedAccountItem = accountSelectionPopUpButton.selectedItem else { return }
+        
+        let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
+        
+        downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account)
+    }
+    
+    func beginDownloadOfVideoWith(additionalArguments: [String]) {
+        
+        let url = inputTextField.stringValue
+        
+        submitButton.title = "Stop Download"
+        
+        downloadController.applicationIsDownloading = true
+        NotificationCenter.default.post(name: processDidBeginNotification, object: self)
+        
+        guard let outputFolder = outputPathControl.url?.absoluteString else { return }
+        
+        let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
+        
+        let output = outputWithoutPrefix + "%(title)s.%(ext)s"
+        
+        guard let selectedAccountItem = accountSelectionPopUpButton.selectedItem else { return }
+        
+        let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
+        
+        downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account, additionalArguments: additionalArguments)
+
     }
     
     @IBAction func manageAccountsButtonClicked(_ sender: NSMenuItem) {
@@ -196,6 +221,23 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         guard let executableUpdatingView = executableUpdatingView else { return }
         executableUpdatingView.layer?.backgroundColor = appearance == "Dark" ? .white : .black
     }
+    
+    // MARK: - Password Protected Videos
+    
+    func presentPasswordProtectedVideoAlert() {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "VideoPasswordSubmissionWC") as? NSWindowController), let window = accountModificationWC.window,
+            let videoPasswordSubmissionVC = window.contentViewController as? VideoPasswordSubmissionViewController else { return }
+        
+        videoPasswordSubmissionVC.delegate = self
+        
+        self.view.window?.beginSheet(window, completionHandler: { (response) in
+            
+        })
+    }
+    
+    
     
     
     // MARK: - Appearance

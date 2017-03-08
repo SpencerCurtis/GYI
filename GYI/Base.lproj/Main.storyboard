@@ -371,6 +371,93 @@
             </objects>
             <point key="canvasLocation" x="986" y="79"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="Vh5-qD-WqP">
+            <objects>
+                <windowController id="RAK-mz-24g" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="srw-am-DPh">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="314" width="480" height="100"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+                    </window>
+                    <connections>
+                        <segue destination="00H-JV-Lcg" kind="relationship" relationship="window.shadowedContentViewController" id="Iha-I1-nVd"/>
+                    </connections>
+                </windowController>
+                <customObject id="l9y-qL-GmQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1489" y="65"/>
+        </scene>
+        <!--Video Password Submission View Controller-->
+        <scene sceneID="wnL-eZ-Izj">
+            <objects>
+                <viewController id="00H-JV-Lcg" customClass="VideoPasswordSubmissionViewController" customModule="GYI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="eP8-gA-60J">
+                        <rect key="frame" x="0.0" y="0.0" width="481" height="100"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKf-f6-NhR">
+                                <rect key="frame" x="-2" y="63" width="485" height="17"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="This video is password protected. Enter the video's password to download it." id="rR1-3l-0It">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3B-2z-PUU">
+                                <rect key="frame" x="20" y="20" width="441" height="22"/>
+                                <subviews>
+                                    <secureTextField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQu-PR-BW5">
+                                        <rect key="frame" x="0.0" y="0.0" width="362" height="22"/>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="9nI-vh-2xo">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <allowedInputSourceLocales>
+                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                            </allowedInputSourceLocales>
+                                        </secureTextFieldCell>
+                                    </secureTextField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rja-Ri-Pvi">
+                                        <rect key="frame" x="364" y="-6" width="83" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Submit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BOi-fd-JNG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="submitPasswordButtonClicked:" target="00H-JV-Lcg" id="N5d-7x-tQk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="H3B-2z-PUU" secondAttribute="trailing" constant="20" id="D85-Am-yQo"/>
+                            <constraint firstAttribute="bottom" secondItem="H3B-2z-PUU" secondAttribute="bottom" constant="20" id="GYD-Vu-gO4"/>
+                            <constraint firstItem="QKf-f6-NhR" firstAttribute="leading" secondItem="eP8-gA-60J" secondAttribute="leading" id="ZGX-kq-hn8"/>
+                            <constraint firstItem="H3B-2z-PUU" firstAttribute="leading" secondItem="eP8-gA-60J" secondAttribute="leading" constant="20" id="bw3-cI-ydf"/>
+                            <constraint firstItem="QKf-f6-NhR" firstAttribute="top" secondItem="eP8-gA-60J" secondAttribute="top" constant="20" id="kO0-xl-tof"/>
+                            <constraint firstAttribute="trailing" secondItem="QKf-f6-NhR" secondAttribute="trailing" id="qsN-em-3zV"/>
+                            <constraint firstItem="H3B-2z-PUU" firstAttribute="centerX" secondItem="eP8-gA-60J" secondAttribute="centerX" id="z9W-Eu-fcz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoPasswordTextField" destination="SQu-PR-BW5" id="LhF-NI-a8i"/>
+                    </connections>
+                </viewController>
+                <customObject id="tUJ-QK-zSo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1489" y="446"/>
+        </scene>
         <!--Account Modification View Controller-->
         <scene sceneID="vQT-T1-IJB">
             <objects>

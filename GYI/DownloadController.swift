@@ -13,11 +13,9 @@ class DownloadController {
     
     static let shared = DownloadController()
     
-    weak var popover: NSPopover? {
-        didSet {
-            print("Popover was set")
-        }
-    }
+    var videoIsPasswordProtectedNotification = Notification.Name("videoIsPasswordProtected")
+    
+    weak var popover: NSPopover?
     
     weak var downloadDelegate: DownloadDelegate?
     weak var processEndedDelegate: ProcessEndedDelegate?
@@ -89,7 +87,7 @@ class DownloadController {
         task.launch()
     }
     
-    func downloadVideoAt(videoURL: String, outputFolder: String, account: Account? = nil) {
+    func downloadVideoAt(videoURL: String, outputFolder: String, account: Account? = nil, additionalArguments: [String]? = nil) {
         
         let task = Process()
         guard let path = Bundle.main.resourcePath else { return }
@@ -104,6 +102,10 @@ class DownloadController {
         //        let skipDownloadTEST = "--skip-download"
         
         var arguments = [ignoreConfig, "-o", output, "-v"]
+        
+        if let additionalArguments = additionalArguments {
+            additionalArguments.forEach({arguments.append($0)})
+        }
         
         if let account = account, let username = account.username, let password = account.password {
             
@@ -120,6 +122,7 @@ class DownloadController {
         let outHandle = pipe.fileHandleForReading
         outHandle.waitForDataInBackgroundAndNotify()
         
+       
         currentTask = task
         
         var dataAvailableObserver: NSObjectProtocol!
@@ -135,9 +138,14 @@ class DownloadController {
                     
                     if str.contains("has already been downloaded") { self.downloadDelegate?.userHasAlreadyDownloadedVideo() }
                     
+                    if str.contains("ExtractorError") {
+                        NotificationCenter.default.post(name: self.videoIsPasswordProtectedNotification, object: self)
+                    }
+                    
                     if str.contains("ETA") { self.downloadDelegate?.parseResponseStringForETA(responseString: str)
                         self.downloadDelegate?.updateDownloadSpeedLabelWith(downloadString: str)
                     }
+                    
                     print(str)
                     
                 }
