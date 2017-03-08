@@ -15,7 +15,6 @@
 		46CCE5A31E0309AB0005239C /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5951E0309AB0005239C /* AccountController.swift */; };
 		46CCE5A61E0309AB0005239C /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */; };
 		46CCE5A71E0309AB0005239C /* DownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59B1E0309AB0005239C /* DownloadController.swift */; };
-		46CCE5A81E0309AB0005239C /* DownloadProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */; };
 		46CCE5AA1E0309AB0005239C /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE59E1E0309AB0005239C /* Stack.swift */; };
 		46CCE5AB1E0309AB0005239C /* youtube-dl in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE59F1E0309AB0005239C /* youtube-dl */; };
 		46CCE5AC1E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5A01E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld */; };
@@ -34,7 +33,6 @@
 		46CCE5951E0309AB0005239C /* AccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountController.swift; path = GYI/AccountController.swift; sourceTree = "<group>"; };
 		46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = GYI/CreateAccountViewController.swift; sourceTree = "<group>"; };
 		46CCE59B1E0309AB0005239C /* DownloadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadController.swift; path = GYI/DownloadController.swift; sourceTree = "<group>"; };
-		46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadProgressViewController.swift; path = GYI/DownloadProgressViewController.swift; sourceTree = "<group>"; };
 		46CCE59E1E0309AB0005239C /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = GYI/Stack.swift; sourceTree = "<group>"; };
 		46CCE59F1E0309AB0005239C /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; path = "youtube-dl"; sourceTree = "<group>"; };
 		46CCE5A11E0309AB0005239C /* YoutubeDLGUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoutubeDLGUI.xcdatamodel; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				46FC3B201E27F9ED007D89B6 /* MenuPopoverViewController.swift */,
-				46CCE59C1E0309AB0005239C /* DownloadProgressViewController.swift */,
 				46D41C4C1E2ED71900F50104 /* AccountModificationViewController.swift */,
 				46CCE59A1E0309AB0005239C /* CreateAccountViewController.swift */,
 				463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */,
@@ -216,7 +213,6 @@
 				46CCE5A71E0309AB0005239C /* DownloadController.swift in Sources */,
 				46CCE5AC1E0309AB0005239C /* YoutubeDLGUI.xcdatamodeld in Sources */,
 				46D41C4D1E2ED71900F50104 /* AccountModificationViewController.swift in Sources */,
-				46CCE5A81E0309AB0005239C /* DownloadProgressViewController.swift in Sources */,
 				463EACD51E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

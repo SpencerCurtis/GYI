@@ -14,16 +14,33 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     @IBOutlet weak var inputTextField: NSTextField!
     @IBOutlet weak var outputPathControl: NSPathControl!
     @IBOutlet weak var accountSelectionPopUpButton: NSPopUpButtonCell!
-    @IBOutlet weak var downloadProgressContainerView: NSView!
     @IBOutlet weak var submitButton: NSButton!
     @IBOutlet weak var defaultOutputFolderCheckboxButton: NSButton!
+    @IBOutlet weak var downloadProgressIndicator: NSProgressIndicator!
+    @IBOutlet weak var playlistCountProgressIndicator: NSProgressIndicator!
+    
+    @IBOutlet weak var timeLeftLabel: NSTextField!
+    @IBOutlet weak var videoCountLabel: NSTextField!
+    @IBOutlet weak var downloadSpeedLabel: NSTextField!
+    
+    @IBOutlet weak var automaticallyUpdateYoutubeDLCheckboxButton: NSButton!
+
+    let downloadController = DownloadController.shared
+    
+    var downloadProgressIndicatorIsAnimating = false
+    var playlistCountProgressIndicatorIsAnimating = false
+    var applicationIsDownloadingVideo = false
+    
+    var currentVideo = 1
+    var numberOfVideosInPlaylist = 1
+    
+    
     
     private let defaultOutputFolderKey = "defaultOutputFolder"
     
     var executableUpdatingView: NSView!
     var userDidCancelDownload = false
     
-    let downloadController = DownloadController.shared
     var appearance: String!
     
     
@@ -35,6 +52,21 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(presentPasswordProtectedVideoAlert)    , name: downloadController.videoIsPasswordProtectedNotification, object: nil)
         
+        downloadController.downloadDelegate = self
+        
+        downloadSpeedLabel.stringValue = "0KiB/s"
+
+        
+        videoCountLabel.stringValue = "No video downloading"
+        timeLeftLabel.stringValue = "Add a video above"
+        downloadProgressIndicator.doubleValue = 0.0
+        playlistCountProgressIndicator.doubleValue = 0.0
+        
+        let userWantsAutoUpdate = UserDefaults.standard.bool(forKey: downloadController.autoUpdateYoutubeDLKey)
+        
+        automaticallyUpdateYoutubeDLCheckboxButton.state = userWantsAutoUpdate ? NSOnState : NSOffState
+
+        
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
         if let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) {
             
@@ -43,6 +75,8 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         } else {
             outputPathControl.url = URL(string: "file:///Users/\(NSUserName)/Downloads")
         }
+        
+        
         
         defaultOutputFolderCheckboxButton.state = 1
         
@@ -59,6 +93,24 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         submitButton.title = "Submit"
         
         if !userDidCancelDownload { inputTextField.stringValue = "" }
+        
+        downloadProgressIndicatorIsAnimating = false
+        
+        guard timeLeftLabel.stringValue != "Video already downloaded"  else { return }
+        
+        playlistCountProgressIndicator.doubleValue = 100
+        if downloadController.userDidCancelDownload {
+            timeLeftLabel.stringValue = "Download canceled"
+        } else if downloadProgressIndicator.doubleValue != 100.0 {
+            timeLeftLabel.stringValue = "Error downloading video"
+        } else {
+            playlistCountProgressIndicator.doubleValue = 100
+            timeLeftLabel.stringValue = "Download Complete"
+        }
+        
+        downloadSpeedLabel.stringValue = "0KiB/s"
+        downloadSpeedLabel.isHidden = true
+        applicationIsDownloadingVideo = false
     }
     
     
@@ -81,7 +133,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         submitButton.title = "Stop Download"
         
         downloadController.applicationIsDownloading = true
-        NotificationCenter.default.post(name: processDidBeginNotification, object: self)
+        self.processDidBegin()
         
         guard let outputFolder = outputPathControl.url?.absoluteString else { return }
         
@@ -103,10 +155,11 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         submitButton.title = "Stop Download"
         
         downloadController.applicationIsDownloading = true
-        NotificationCenter.default.post(name: processDidBeginNotification, object: self)
-        
+
+        self.processDidBegin()
+
         guard let outputFolder = outputPathControl.url?.absoluteString else { return }
-        
+
         let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
         
         let output = outputWithoutPrefix + "%(title)s.%(ext)s"
@@ -258,6 +311,142 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     override func cancelOperation(_ sender: Any?) {
         NotificationCenter.default.post(name: closePopoverNotification, object: self)
     }
+    
+    @IBAction func quitButtonClicked(_ sender: Any) {
+        if applicationIsDownloadingVideo {
+            let alert: NSAlert = NSAlert()
+            alert.messageText =  "You are currently downloading a video."
+            alert.informativeText =  "Do you stil want to quit GYI?"
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            
+            guard let window = self.view.window else { return }
+            alert.beginSheetModal(for: window, completionHandler: { (response) in
+                if response == NSAlertFirstButtonReturn { NSApplication.shared().terminate(self) }
+            })
+        } else {
+            downloadController.popover?.performClose(nil)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(terminateApp), userInfo: nil, repeats: false)
+        }
+  
+    }
+}
+
+extension MenuPopoverViewController: DownloadDelegate {
+    
+    func processDidBegin() {
+        videoCountLabel.stringValue = "Video 1 of 1"
+        timeLeftLabel.stringValue = "Getting video..."
+        playlistCountProgressIndicator.doubleValue = 0.0
+        downloadProgressIndicator.doubleValue = 0.0
+        downloadProgressIndicator.startAnimation(self)
+        downloadSpeedLabel.isHidden = false
+        applicationIsDownloadingVideo = true
+    }
+    
+    func updateProgressBarWith(percentString: String?) {
+        let numbersOnly = percentString?.trimmingCharacters(in: NSCharacterSet.decimalDigits.inverted)
+        
+        guard let numbersOnlyUnwrapped = numbersOnly, let progressPercentage = Double(numbersOnlyUnwrapped) else { return }
+        downloadProgressIndicator.doubleValue = Double(progressPercentage)
+        if progressPercentage == 100.0 && (currentVideo + 1) <= numberOfVideosInPlaylist {
+            currentVideo += 1
+            videoCountLabel.stringValue = "Video \(currentVideo) of \(numberOfVideosInPlaylist)"
+            playlistCountProgressIndicator.doubleValue = Double(currentVideo) / Double(numberOfVideosInPlaylist)
+        }
+    }
+    
+    func updatePlaylistProgressBarWith(downloadString: String) {
+        
+        if downloadString.contains("Downloading video") {
+            
+            let downloadStringWords = downloadString.components(separatedBy: " ")
+            
+            var secondNumber = 1.0
+            var secondNumberInt = 1
+            if let secondNum = downloadStringWords.last {
+                var secondNumb = secondNum
+                if secondNumb.contains("\n") {
+                    secondNumb.characters.removeLast()
+                    guard let secondNum = Double(secondNumb), let secondNumInt = Int(secondNumb) else { return }
+                    secondNumber = secondNum
+                    secondNumberInt = secondNumInt
+                } else {
+                    guard let secondNum = Double(secondNumb), let secondNumInt = Int(secondNumb) else { return }
+                    secondNumber = secondNum
+                    secondNumberInt = secondNumInt
+                }
+            }
+            
+            
+            playlistCountProgressIndicator.minValue = 0.0
+            playlistCountProgressIndicator.maxValue = 1.0
+            playlistCountProgressIndicator.startAnimation(self)
+            let percentage = Double(currentVideo) / secondNumber
+            numberOfVideosInPlaylist = Int(secondNumber)
+            
+            videoCountLabel.stringValue = "Video \(currentVideo) of \(secondNumberInt)"
+            playlistCountProgressIndicator.doubleValue = percentage
+            
+            
+        }
+    }
+    
+    func updateDownloadSpeedLabelWith(downloadString: String) {
+        
+        let downloadStringWords = downloadString.components(separatedBy: " ")
+        
+        guard let atStringIndex = downloadStringWords.index(of: "at") else { return }
+        
+        var speed = downloadStringWords[(atStringIndex + 1)]
+        
+        if speed == "" { speed = downloadStringWords[(atStringIndex + 2)] }
+        
+        
+        downloadSpeedLabel.stringValue = speed
+    }
+    
+    func parseResponseStringForETA(responseString: String) {
+        let words = responseString.components(separatedBy: " ")
+        
+        guard let timeLeft = words.last else { return }
+        
+        var timeLeftString = timeLeft
+        
+        if (timeLeftString.contains("00:")) { timeLeftString.characters.removeFirst() }
+        
+        timeLeftLabel.stringValue = "Time remaining: \(timeLeft)"
+    }
+    
+    func userHasAlreadyDownloadedVideo() {
+        
+        timeLeftLabel.stringValue = "Video already downloaded"
+        
+        let alert: NSAlert = NSAlert()
+        alert.messageText =  "You have already downloaded this video."
+        alert.informativeText =  "Please check your output directory."
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        
+        guard let window = self.view.window else { return }
+        alert.beginSheetModal(for: window, completionHandler: nil)
+        
+    }
+    
+    func terminateApp() {
+        NSApplication.shared().terminate(_:self)
+    }
+    
+    @IBAction func automaticallyUpdateYoutubeDLCheckboxButtonClicked(_ sender: NSButton) {
+        switch sender.state {
+        case 0: UserDefaults.standard.set(false, forKey: downloadController.autoUpdateYoutubeDLKey)
+        case 1: UserDefaults.standard.set(true, forKey: downloadController.autoUpdateYoutubeDLKey)
+        default: break
+        }
+    }
+
 }
 
 
