@@ -99,14 +99,15 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         guard timeLeftLabel.stringValue != "Video already downloaded"  else { return }
         
-        playlistCountProgressIndicator.doubleValue = 100
-        if downloadController.userDidCancelDownload {
+        playlistCountProgressIndicator.doubleValue = 100.0
+        
+        if downloadProgressIndicator.doubleValue == 100.0 {
+            playlistCountProgressIndicator.doubleValue = 100.0
+            timeLeftLabel.stringValue = "Download Complete"
+        } else if downloadController.userDidCancelDownload {
             timeLeftLabel.stringValue = "Download canceled"
         } else if downloadProgressIndicator.doubleValue != 100.0 {
             timeLeftLabel.stringValue = "Error downloading video"
-        } else {
-            playlistCountProgressIndicator.doubleValue = 100
-            timeLeftLabel.stringValue = "Download Complete"
         }
         
         downloadSpeedLabel.stringValue = "0KiB/s"
