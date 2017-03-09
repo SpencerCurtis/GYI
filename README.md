@@ -8,6 +8,7 @@ A GUI for the command-line program 'youtube-dl,' hence the name 'GYI' (Graphical
 * The user may choose the destination they want to save the video(s) to. Also, they have the option of keeping a specific folder as their default output folder.
 * The user may choose to automatically update the underlying youtube-dl executable file upon launching the app. At this time, it is the only way to update the executable.
 * Progress indicators for both the current video being downloaded and for an entire playlist to show overall progress.
+* The user can supply a password to download password protected videos (for example from Vimeo). 
 
 
 ## Notes
