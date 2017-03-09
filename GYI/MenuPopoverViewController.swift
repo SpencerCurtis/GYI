@@ -15,6 +15,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     @IBOutlet weak var outputPathControl: NSPathControl!
     @IBOutlet weak var accountSelectionPopUpButton: NSPopUpButtonCell!
     @IBOutlet weak var submitButton: NSButton!
+    @IBOutlet weak var videoIsPasswordProtectedCheckboxButtton: NSButton!
     @IBOutlet weak var defaultOutputFolderCheckboxButton: NSButton!
     @IBOutlet weak var downloadProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var playlistCountProgressIndicator: NSProgressIndicator!
@@ -24,7 +25,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     @IBOutlet weak var downloadSpeedLabel: NSTextField!
     
     @IBOutlet weak var automaticallyUpdateYoutubeDLCheckboxButton: NSButton!
-
+    
     let downloadController = DownloadController.shared
     
     var downloadProgressIndicatorIsAnimating = false
@@ -55,7 +56,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         downloadController.downloadDelegate = self
         
         downloadSpeedLabel.stringValue = "0KiB/s"
-
+        
         
         videoCountLabel.stringValue = "No video downloading"
         timeLeftLabel.stringValue = "Add a video above"
@@ -65,7 +66,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         let userWantsAutoUpdate = UserDefaults.standard.bool(forKey: downloadController.autoUpdateYoutubeDLKey)
         
         automaticallyUpdateYoutubeDLCheckboxButton.state = userWantsAutoUpdate ? NSOnState : NSOffState
-
+        
         
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
         if let defaultPath = UserDefaults.standard.url(forKey: defaultOutputFolderKey) {
@@ -118,6 +119,8 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         guard inputTextField.stringValue != "" else { return }
         
+        guard videoIsPasswordProtectedCheckboxButtton.state == 0 else { presentVideoPasswordSubmissionSheet(); return }
+        
         if downloadController.applicationIsDownloading {
             downloadController.terminateCurrentTask()
             submitButton.title = "Submit"
@@ -127,6 +130,17 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
             beginDownloadOfVideoWith(url: inputTextField.stringValue)
         }
         
+    }
+    
+    func presentVideoPasswordSubmissionSheet() {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "VideoPasswordSubmissionWC") as? NSWindowController), let window = accountModificationWC.window,
+            let videoPasswordSubmissionVC = window.contentViewController as? VideoPasswordSubmissionViewController else { return }
+        
+        videoPasswordSubmissionVC.delegate = self
+        
+        self.view.window?.beginSheet(window, completionHandler: nil)
     }
     
     func beginDownloadOfVideoWith(url: String) {
@@ -155,11 +169,11 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         submitButton.title = "Stop Download"
         
         downloadController.applicationIsDownloading = true
-
+        
         self.processDidBegin()
-
+        
         guard let outputFolder = outputPathControl.url?.absoluteString else { return }
-
+        
         let outputWithoutPrefix = outputFolder.replacingOccurrences(of: "file://", with: "")
         
         let output = outputWithoutPrefix + "%(title)s.%(ext)s"
@@ -169,7 +183,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         let account = AccountController.accounts.filter({$0.title == selectedAccountItem.title}).first
         
         downloadController.downloadVideoAt(videoURL: url, outputFolder: output, account: account, additionalArguments: additionalArguments)
-
+        
     }
     
     @IBAction func manageAccountsButtonClicked(_ sender: NSMenuItem) {
@@ -329,7 +343,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
             downloadController.popover?.performClose(nil)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(terminateApp), userInfo: nil, repeats: false)
         }
-  
+        
     }
 }
 
@@ -446,7 +460,6 @@ extension MenuPopoverViewController: DownloadDelegate {
         default: break
         }
     }
-
 }
 
 

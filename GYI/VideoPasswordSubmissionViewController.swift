@@ -23,8 +23,19 @@ class VideoPasswordSubmissionViewController: NSViewController {
         let videoPassword = videoPasswordTextField.stringValue
         
         delegate?.beginDownloadOfVideoWith(additionalArguments: ["--video-password", videoPassword])
+        dismissSheet()
+    }
+    @IBAction func cancelButtonClicked(_ sender: Any) {
+        dismissSheet()
     }
     
+    override func cancelOperation(_ sender: Any?) {
+        dismissSheet()
+    }
+    
+    func dismissSheet() {
+        self.view.window?.sheetParent?.endSheet(self.view.window!)
+    }
 }
 
 protocol VideoPasswordSubmissionDelegate: class {
