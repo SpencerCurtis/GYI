@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462CC61D1EA66A42005393B7 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 462CC61C1EA66A42005393B7 /* ffmpeg */; };
 		463EACD51E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */; };
 		46CCE5861E0309510005239C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CCE5851E0309510005239C /* AppDelegate.swift */; };
 		46CCE58A1E0309510005239C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46CCE5891E0309510005239C /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		462CC61C1EA66A42005393B7 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		463EACD31E69FA5100A1AEB6 /* VideoPasswordSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPasswordSubmissionViewController.swift; path = GYI/VideoPasswordSubmissionViewController.swift; sourceTree = "<group>"; };
 		46CCE5821E0309510005239C /* GYI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CCE5851E0309510005239C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		46CCE5AF1E0309DF0005239C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				462CC61C1EA66A42005393B7 /* ffmpeg */,
 				46CCE5851E0309510005239C /* AppDelegate.swift */,
 				46CCE5891E0309510005239C /* Assets.xcassets */,
 				46CCE58E1E0309510005239C /* Info.plist */,
@@ -194,6 +197,7 @@
 				46CCE58A1E0309510005239C /* Assets.xcassets in Resources */,
 				46CCE58D1E0309510005239C /* Main.storyboard in Resources */,
 				46CCE5AB1E0309AB0005239C /* youtube-dl in Resources */,
+				462CC61D1EA66A42005393B7 /* ffmpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

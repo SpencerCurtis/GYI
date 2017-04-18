@@ -52,7 +52,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         self.view.layer?.backgroundColor = CGColor.white
         
         NotificationCenter.default.addObserver(self, selector: #selector(processDidEnd), name: processDidEndNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(presentPasswordProtectedVideoAlert)    , name: downloadController.videoIsPasswordProtectedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentPasswordProtectedVideoAlert), name: downloadController.videoIsPasswordProtectedNotification, object: nil)
         
         downloadController.downloadDelegate = self
         
@@ -368,7 +368,9 @@ extension MenuPopoverViewController: DownloadDelegate {
         let numbersOnly = percentString?.trimmingCharacters(in: NSCharacterSet.decimalDigits.inverted)
         
         guard let numbersOnlyUnwrapped = numbersOnly, let progressPercentage = Double(numbersOnlyUnwrapped) else { return }
-        downloadProgressIndicator.doubleValue = Double(progressPercentage)
+        if progressPercentage > downloadProgressIndicator.doubleValue {
+            downloadProgressIndicator.doubleValue = progressPercentage
+        }
         if progressPercentage == 100.0 && (currentVideo + 1) <= numberOfVideosInPlaylist {
             currentVideo += 1
             videoCountLabel.stringValue = "Video \(currentVideo) of \(numberOfVideosInPlaylist)"
