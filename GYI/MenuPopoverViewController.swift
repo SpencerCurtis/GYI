@@ -34,6 +34,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     
     var currentVideo = 1
     var numberOfVideosInPlaylist = 1
+    var videoNeedsAudio = false
     
     
     
@@ -114,6 +115,10 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         downloadSpeedLabel.stringValue = "0KiB/s"
         downloadSpeedLabel.isHidden = true
         applicationIsDownloadingVideo = false
+        
+        
+        downloadProgressIndicator.stopAnimation(self)
+        playlistCountProgressIndicator.stopAnimation(self)
     }
     
     func presentVideoPasswordSubmissionSheet() {
@@ -359,6 +364,7 @@ extension MenuPopoverViewController: DownloadDelegate {
         timeLeftLabel.stringValue = "Getting video..."
         playlistCountProgressIndicator.doubleValue = 0.0
         downloadProgressIndicator.doubleValue = 0.0
+        downloadProgressIndicator.isIndeterminate = true
         downloadProgressIndicator.startAnimation(self)
         downloadSpeedLabel.isHidden = false
         applicationIsDownloadingVideo = true
@@ -368,13 +374,27 @@ extension MenuPopoverViewController: DownloadDelegate {
         let numbersOnly = percentString?.trimmingCharacters(in: NSCharacterSet.decimalDigits.inverted)
         
         guard let numbersOnlyUnwrapped = numbersOnly, let progressPercentage = Double(numbersOnlyUnwrapped) else { return }
+        
+        if downloadProgressIndicator.isIndeterminate {
+            downloadProgressIndicator.isIndeterminate = false
+        }
+        
         if progressPercentage > downloadProgressIndicator.doubleValue {
             downloadProgressIndicator.doubleValue = progressPercentage
         }
+        
         if progressPercentage == 100.0 && (currentVideo + 1) <= numberOfVideosInPlaylist {
+            
             currentVideo += 1
             videoCountLabel.stringValue = "Video \(currentVideo) of \(numberOfVideosInPlaylist)"
             playlistCountProgressIndicator.doubleValue = Double(currentVideo) / Double(numberOfVideosInPlaylist)
+        }
+        
+        if currentVideo == 1 && numberOfVideosInPlaylist == 1 && progressPercentage == 100.0 {
+            videoNeedsAudio = true
+            if !downloadProgressIndicator.isIndeterminate {
+                downloadProgressIndicator.isIndeterminate = true
+            }
         }
     }
     
@@ -436,8 +456,12 @@ extension MenuPopoverViewController: DownloadDelegate {
         var timeLeftString = timeLeft
         
         if (timeLeftString.contains("00:")) { timeLeftString.characters.removeFirst() }
-        
-        timeLeftLabel.stringValue = "Time remaining: \(timeLeft)"
+        if videoNeedsAudio {
+            timeLeftLabel.stringValue = "Getting audio. Almost done."
+        } else {
+            timeLeftLabel.stringValue = "Getting video. Time remaining: \(timeLeft)"
+        }
+        //        timeLeftLabel.stringValue = "Time remaining: \(timeLeft)"
     }
     
     func userHasAlreadyDownloadedVideo() {
