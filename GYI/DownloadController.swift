@@ -87,10 +87,17 @@ class DownloadController {
         task.launch()
     }
     
+    var ffmpegPath: String? {
+        guard let path = Bundle.main.resourcePath else { return nil }
+        var fullPath = path
+        fullPath.append("/ffmpeg")
+        return fullPath
+    }
+    
     func downloadVideoAt(videoURL: String, outputFolder: String, account: Account? = nil, additionalArguments: [String]? = nil) {
         
         let task = Process()
-        guard let path = Bundle.main.resourcePath else { return }
+        guard let path = Bundle.main.resourcePath, let ffmpegPath = ffmpegPath else { return }
         var fullPath = path
         fullPath.append("/youtube-dl")
         task.launchPath = fullPath
@@ -103,15 +110,15 @@ class DownloadController {
         
         var arguments = [ignoreConfig, "-o", output, "-v"]
         
-        if let additionalArguments = additionalArguments {
-            additionalArguments.forEach({arguments.append($0)})
-        }
+        // Arguments to use ffmpeg so that the video can have audio. At this time (4/18/17), videos downloaded from Vimeo are not downloaded with audio unless you use the ffmpeg arguements
+        let ffmpegArguments = ["--ffmpeg-location", ffmpegPath]
+        if !videoURL.contains("youtube.com") { arguments += ffmpegArguments }
         
         if let account = account, let username = account.username, let password = account.password {
-            
-            let accountArgs = ["-u", username, "-p", password]
-            arguments.insert(contentsOf: accountArgs, at: 0)
+            arguments += ["-u", username, "-p", password]
         }
+        
+        if let additionalArguments = additionalArguments { arguments += additionalArguments }
         
         arguments.append(videoURL)
         
@@ -121,7 +128,6 @@ class DownloadController {
         task.standardOutput = pipe
         let outHandle = pipe.fileHandleForReading
         outHandle.waitForDataInBackgroundAndNotify()
-        
        
         currentTask = task
         
