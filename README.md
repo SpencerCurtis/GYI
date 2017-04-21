@@ -16,12 +16,15 @@ GYI is in its early stages, though it is a working app for the most part, albeit
 
 GYI will automatically download the highest quality video possible. Again, **some** websites require authentication (which is done through GYI) to be able to download the actual highest quality available on the website.
 
+As of about April 2017, something has changed the way downloading videos from some websites (Vimeo, for example) works, whether because of a youtube-dl update, or something on the video hosts' end. It results in a downloaded video but no audio, so FFmpeg has also been embedded in GYI to circumvent this issue. The video and audio are downloaded separately then combined into a single video file.
+
 ## Built With
 * [youtube-dl](https://github.com/rg3/youtube-dl)
+* [FFmpeg](https://github.com/FFmpeg/FFmpeg)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-The real credit goes to all those that work on youtube-dl. It does all the hard work in GYI.
+The real credit goes to all those that work on youtube-dl and FFmpeg. They do all the hard work in GYI.
 
