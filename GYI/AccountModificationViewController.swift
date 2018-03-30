@@ -26,7 +26,7 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         tableView.dataSource = self
         tableView.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(setSelectedRow), name: Notification.Name.NSTableViewSelectionDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setSelectedRow), name: NSTableView.selectionDidChangeNotification, object: nil)
     }
     
     
@@ -41,16 +41,16 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         let alert: NSAlert = NSAlert()
         alert.messageText =  "Are you sure you want to delete this account?"
         alert.informativeText =  "This account's information cannot be recovered."
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: "OK")
         alert.addButton(withTitle: "Cancel")
         
         guard let window = self.view.window else { return }
         alert.beginSheetModal(for: window, completionHandler: { (response) in
-            if response == NSAlertFirstButtonReturn {
+            if response == NSApplication.ModalResponse.alertFirstButtonReturn {
                 
                 let indexSet = IndexSet(arrayLiteral: selectedRow)
-                self.tableView.removeRows(at: indexSet, withAnimation: .slideRight)
+                self.tableView.removeRows(at: indexSet, withAnimation: NSTableView.AnimationOptions.slideRight)
                 self.tableView.deselectAll(self)
                 
                 let account = AccountController.accounts[selectedRow]
@@ -73,9 +73,9 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
     }
     
     func showAddAccountSheet() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         
-        guard let newAccountWC = storyboard.instantiateController(withIdentifier: "AddNewAccountWindow") as? NSWindowController, let newAccountVC = newAccountWC.window?.contentViewController as? CreateAccountViewController else { return }
+        guard let newAccountWC = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "AddNewAccountWindow")) as? NSWindowController, let newAccountVC = newAccountWC.window?.contentViewController as? CreateAccountViewController else { return }
         
         newAccountVC.delegate = self
         
@@ -84,7 +84,7 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         })
     }
     
-    func setSelectedRow() {
+    @objc func setSelectedRow() {
         self.selectedRow = tableView.selectedRow != -1 ? tableView.selectedRow : nil
     }
     
@@ -108,12 +108,12 @@ class AccountModificationViewController: NSViewController, NSTableViewDelegate, 
         
         if tableColumn == tableView.tableColumns[0] {
             
-            guard let cell = tableView.make(withIdentifier: CellIdentifiers.accountNameCell.rawValue, owner: nil) as? NSTableCellView, let title = account.title else { return nil }
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CellIdentifiers.accountNameCell.rawValue), owner: nil) as? NSTableCellView, let title = account.title else { return nil }
             cell.textField?.stringValue = title
             return cell
             
         } else if tableColumn == tableView.tableColumns[1] {
-            guard let cell = tableView.make(withIdentifier: CellIdentifiers.usernameCell.rawValue, owner: nil) as? NSTableCellView, let username = account.username else { return nil }
+            guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CellIdentifiers.usernameCell.rawValue), owner: nil) as? NSTableCellView, let username = account.username else { return nil }
             cell.textField?.stringValue = username
             return cell
         } else {

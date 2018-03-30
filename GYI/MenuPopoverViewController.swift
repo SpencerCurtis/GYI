@@ -67,7 +67,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         let userWantsAutoUpdate = UserDefaults.standard.bool(forKey: downloadController.autoUpdateYoutubeDLKey)
         
-        automaticallyUpdateYoutubeDLCheckboxButton.state = userWantsAutoUpdate ? NSOnState : NSOffState
+        automaticallyUpdateYoutubeDLCheckboxButton.state = userWantsAutoUpdate ? .on : .off
         
         
         outputPathControl.doubleAction = #selector(openOutputFolderPanel)
@@ -81,7 +81,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         
         
-        defaultOutputFolderCheckboxButton.state = 1
+        defaultOutputFolderCheckboxButton.state = NSControl.StateValue(rawValue: 1)
         
         guard let popover = downloadController.popover else { return }
         popover.delegate = self
@@ -92,7 +92,7 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         setupAccountSelectionPopUpButton()
     }
     
-    func processDidEnd() {
+    @objc func processDidEnd() {
         submitButton.title = "Submit"
         
         if !userDidCancelDownload { inputTextField.stringValue = "" }
@@ -122,17 +122,15 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     }
     
     func presentVideoPasswordSubmissionSheet() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         
-        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "VideoPasswordSubmissionWC") as? NSWindowController), let window = accountModificationWC.window,
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VideoPasswordSubmissionWC")) as? NSWindowController), let window = accountModificationWC.window,
             let videoPasswordSubmissionVC = window.contentViewController as? VideoPasswordSubmissionViewController else { return }
         
         videoPasswordSubmissionVC.delegate = self
         
         self.view.window?.beginSheet(window, completionHandler: nil)
     }
-    
-    
     
     @IBAction func manageAccountsButtonClicked(_ sender: NSMenuItem) {
         manageAccountsSheet()
@@ -151,9 +149,9 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     
     
     func manageAccountsSheet() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         
-        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "AccountModificationWC") as? NSWindowController), let window = accountModificationWC.window,
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "AccountModificationWC")) as? NSWindowController), let window = accountModificationWC.window,
             let accountModificationVC = window.contentViewController as? AccountModificationViewController else { return }
         
         accountModificationVC.delegate = self
@@ -179,14 +177,14 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     }
     
     @IBAction func defaultOutputFolderButtonClicked(_ sender: NSButton) {
-        if sender.state == 1 {
+        if sender.state.rawValue == 1 {
             let path = outputPathControl.url
             
             UserDefaults.standard.set(path, forKey: defaultOutputFolderKey)
         }
     }
     
-    func openOutputFolderPanel() {
+    @objc func openOutputFolderPanel() {
         let openPanel = NSOpenPanel()
         
         openPanel.allowsMultipleSelection = false
@@ -195,9 +193,9 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
         
         openPanel.begin { (result) in
             
-            guard let path = openPanel.url, result == NSFileHandlingPanelOKButton else { return }
+            guard let path = openPanel.url, result.rawValue == NSFileHandlingPanelOKButton else { return }
             
-            if self.outputPathControl.url != path { self.defaultOutputFolderCheckboxButton.state = 0 }
+            if self.outputPathControl.url != path { self.defaultOutputFolderCheckboxButton.state = NSControl.StateValue(rawValue: 0) }
             
             self.outputPathControl.url = path
             
@@ -232,10 +230,10 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
     
     // MARK: - Password Protected Videos
     
-    func presentPasswordProtectedVideoAlert() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+    @objc func presentPasswordProtectedVideoAlert() {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         
-        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: "VideoPasswordSubmissionWC") as? NSWindowController), let window = accountModificationWC.window,
+        guard let accountModificationWC = (storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VideoPasswordSubmissionWC")) as? NSWindowController), let window = accountModificationWC.window,
             let videoPasswordSubmissionVC = window.contentViewController as? VideoPasswordSubmissionViewController else { return }
         
         videoPasswordSubmissionVC.delegate = self
@@ -279,13 +277,13 @@ class MenuPopoverViewController: NSViewController, NSPopoverDelegate, AccountCre
             let alert: NSAlert = NSAlert()
             alert.messageText =  "You are currently downloading a video."
             alert.informativeText =  "Do you stil want to quit GYI?"
-            alert.alertStyle = NSAlertStyle.informational
+            alert.alertStyle = NSAlert.Style.informational
             alert.addButton(withTitle: "OK")
             alert.addButton(withTitle: "Cancel")
             
             guard let window = self.view.window else { return }
             alert.beginSheetModal(for: window, completionHandler: { (response) in
-                if response == NSAlertFirstButtonReturn { NSApplication.shared().terminate(self) }
+                if response == NSApplication.ModalResponse.alertFirstButtonReturn { NSApplication.shared.terminate(self) }
             })
         } else {
             downloadController.popover?.performClose(nil)
@@ -303,7 +301,7 @@ extension MenuPopoverViewController: DownloadDelegate {
         
         guard inputTextField.stringValue != "" else { return }
         
-        guard videoIsPasswordProtectedCheckboxButtton.state == 0 else { presentVideoPasswordSubmissionSheet(); return }
+        guard videoIsPasswordProtectedCheckboxButtton.state.rawValue == 0 else { presentVideoPasswordSubmissionSheet(); return }
         
         if downloadController.applicationIsDownloading {
             downloadController.terminateCurrentTask()
@@ -409,7 +407,7 @@ extension MenuPopoverViewController: DownloadDelegate {
             if let secondNum = downloadStringWords.last {
                 var secondNumb = secondNum
                 if secondNumb.contains("\n") {
-                    secondNumb.characters.removeLast()
+                    secondNumb.removeLast()
                     guard let secondNum = Double(secondNumb), let secondNumInt = Int(secondNumb) else { return }
                     secondNumber = secondNum
                     secondNumberInt = secondNumInt
@@ -455,7 +453,7 @@ extension MenuPopoverViewController: DownloadDelegate {
         
         var timeLeftString = timeLeft
         
-        if (timeLeftString.contains("00:")) { timeLeftString.characters.removeFirst() }
+        if (timeLeftString.contains("00:")) { timeLeftString.removeFirst() }
         if videoNeedsAudio {
             timeLeftLabel.stringValue = "Getting audio. Almost done."
         } else {
@@ -471,7 +469,7 @@ extension MenuPopoverViewController: DownloadDelegate {
         let alert: NSAlert = NSAlert()
         alert.messageText =  "You have already downloaded this video."
         alert.informativeText =  "Please check your output directory."
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: "OK")
         alert.addButton(withTitle: "Cancel")
         
@@ -480,15 +478,19 @@ extension MenuPopoverViewController: DownloadDelegate {
         
     }
     
-    func terminateApp() {
-        NSApplication.shared().terminate(_:self)
+    @objc func terminateApp() {
+        NSApplication.shared.terminate(_:self)
     }
     
     @IBAction func automaticallyUpdateYoutubeDLCheckboxButtonClicked(_ sender: NSButton) {
         switch sender.state {
-        case 0: UserDefaults.standard.set(false, forKey: downloadController.autoUpdateYoutubeDLKey)
-        case 1: UserDefaults.standard.set(true, forKey: downloadController.autoUpdateYoutubeDLKey)
-        default: break
+            
+        case .off:
+            UserDefaults.standard.set(false, forKey: downloadController.autoUpdateYoutubeDLKey)
+        case .on:
+            UserDefaults.standard.set(true, forKey: downloadController.autoUpdateYoutubeDLKey)
+        default:
+            break
         }
     }
 }

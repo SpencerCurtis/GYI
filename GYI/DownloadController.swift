@@ -108,7 +108,7 @@ class DownloadController {
         
         //        let skipDownloadTEST = "--skip-download"
         
-        var arguments = [ignoreConfig, "-o", output, "-v"]
+        var arguments = [ignoreConfig, "-o", output, "-v", "-f", "[ext=mp4]"]
         
         // Arguments to use ffmpeg so that the video can have audio. At this time (4/18/17), videos downloaded from Vimeo are not downloaded with audio unless you use the ffmpeg arguements
         let ffmpegArguments = ["--ffmpeg-location", ffmpegPath]

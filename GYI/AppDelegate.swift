@@ -11,18 +11,18 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    let statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     let popover = NSPopover()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         guard let button = statusItem.button else { return }
-        button.image = NSImage(named: "StatusBarButtonImage")
+        button.image = NSImage(named: NSImage.Name(rawValue: "StatusBarButtonImage"))
         button.action = #selector(togglePopover)
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         
-        guard let menuPopoverViewController = storyboard.instantiateController(withIdentifier: "MenuPopoverViewController") as? MenuPopoverViewController else { return }
+        guard let menuPopoverViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MenuPopoverViewController")) as? MenuPopoverViewController else { return }
         
         popover.behavior = .semitransient
         popover.contentViewController = menuPopoverViewController
@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    func togglePopover(sender: Any?) {
+    @objc func togglePopover(sender: Any?) {
         popover.isShown == true ? closePopover(sender: sender) : showPopover(sender: sender)        
     }
     
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
     }
     
-    func closePopover(sender: Any?) {
+    @objc func closePopover(sender: Any?) {
         popover.performClose(sender)
     }
 }
