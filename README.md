@@ -1,6 +1,8 @@
 # GYI
 A GUI for the command-line program 'youtube-dl,' hence the name 'GYI' (Graphical Youtube-dl Interface). Used for downloading videos from websites (YouTube, Vimeo, Crunchyroll, etc.)
 
+![gyidemo](https://user-images.githubusercontent.com/16965587/38143830-7434aa4e-33ff-11e8-9ce1-8776d56f924c.gif)
+
 ## Features
 * The youtube-dl executable is embedded in the app, so there is no need to download it through traditional methods (curl, wget, homebrew, etc.).
 * GYI can download a single video at a time, or a whole group of videos (like a YouTube playlist).
