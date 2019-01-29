@@ -20,6 +20,8 @@ GYI will automatically download the highest quality video possible. Again, **som
 
 As of about April 2017, something has changed the way downloading videos from some websites (Vimeo, for example) works, whether because of a youtube-dl update, or something on the video hosts' end. It results in a downloaded video but no audio, so FFmpeg has also been embedded in GYI to circumvent this issue. The video and audio are downloaded separately then combined into a single video file.
 
+Currently, I am not actively working on this whatsoever, and haven't been maintaining it due to a lack of free time and other side projects I am working on. Feel free to use it however you wish, but know it will need some work to get running
+
 ## Built With
 * [youtube-dl](https://github.com/rg3/youtube-dl)
 * [FFmpeg](https://github.com/FFmpeg/FFmpeg)
